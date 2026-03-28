@@ -53,6 +53,15 @@
         /* Utility classes for favorites heart fill */
         .fill-red-500 { fill: #ef4444; }
         .fill-transparent { fill: transparent; }
+        
+        /* Custom animations for hero */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
     </style>
 </head>
 <body class="min-h-screen font-sans">
@@ -110,24 +119,42 @@
         
         <!-- HOME VIEW -->
         <div id="view-home" class="fade-in block">
-            <!-- Hero -->
-            <div class="relative h-[50vh] min-h-[450px] flex items-center justify-center overflow-hidden">
+            <!-- Hero Otimizado -->
+            <div class="relative py-16 sm:py-24 lg:py-32 flex items-center justify-center overflow-hidden min-h-[auto] lg:min-h-[500px]">
                 <div class="absolute inset-0">
                     <img src="https://images.unsplash.com/photo-1576485290814-1c72ea4ccbab?auto=format&fit=crop&w=1920&q=80" alt="Luxury background" class="w-full h-full object-cover opacity-20">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent"></div>
                     <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-transparent to-zinc-950"></div>
                 </div>
-                <div class="relative z-10 text-center px-4 max-w-3xl w-full">
-                    <h1 class="text-4xl md:text-6xl font-serif text-white mb-6 leading-tight">
-                        Encontre a <span class="text-amber-500 italic">Companhia Perfeita</span>
+                <div class="relative z-10 text-center px-4 max-w-4xl w-full flex flex-col items-center">
+                    
+                    <!-- Badge de Confiança (Marketing) -->
+                    <div class="inline-flex items-center space-x-2 bg-zinc-900/60 backdrop-blur-md border border-zinc-700/50 rounded-full px-4 py-1.5 mb-6 md:mb-8 animate-fade-in-up">
+                        <span class="flex h-2 w-2 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        <span class="text-xs md:text-sm text-zinc-300 font-medium">Plataforma 100% Segura e Sigilosa</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-white mb-4 md:mb-6 leading-tight tracking-tight animate-fade-in-up" style="animation-delay: 0.1s; opacity: 0;">
+                        Encontre a <span class="text-amber-500 italic relative inline-block">Companhia Perfeita<svg class="absolute w-full h-3 -bottom-1 left-0 text-amber-500/30 hidden sm:block" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="4" fill="transparent"/></svg></span>
                     </h1>
-                    <p class="text-lg md:text-xl text-zinc-400 mb-10 font-light hidden sm:block">
-                        O diretório mais exclusivo e sofisticado do Brasil. Discrição, beleza e elegância.
+                    
+                    <p class="text-base sm:text-lg md:text-xl text-zinc-400 mb-8 md:mb-12 font-light max-w-2xl animate-fade-in-up" style="animation-delay: 0.2s; opacity: 0;">
+                        O diretório mais exclusivo do Brasil. Profissionais de alto nível, selecionadas rigorosamente para momentos inesquecíveis.
                     </p>
-                    <div class="flex flex-col sm:flex-row max-w-2xl mx-auto bg-zinc-900/80 backdrop-blur-md p-2 rounded-xl border border-zinc-800 shadow-2xl">
-                        <div class="flex-1 flex items-center px-4 py-3 border-b sm:border-b-0 sm:border-r border-zinc-700/50">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-zinc-500 mr-3 shrink-0"></i>
-                            <input type="text" id="searchInput" placeholder="Busque por cidade, bairro ou nome..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-zinc-500 outline-none">
+                    
+                    <!-- Quick Search Bar -->
+                    <div class="w-full max-w-2xl mx-auto bg-zinc-900/80 backdrop-blur-md p-2 rounded-2xl border border-zinc-700/50 shadow-2xl animate-fade-in-up transition-all hover:border-amber-500/30" style="animation-delay: 0.3s; opacity: 0;">
+                        <div class="flex flex-col sm:flex-row items-center">
+                            <div class="flex-1 flex items-center px-4 py-3 w-full border-b sm:border-b-0 sm:border-r border-zinc-700/50">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i>
+                                <input type="text" id="searchInput" placeholder="Busque por cidade, bairro ou nome..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-zinc-500 outline-none text-base sm:text-lg">
+                            </div>
+                            <button onclick="document.getElementById('category-tabs').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-2 bg-amber-600 hover:bg-amber-500 text-white px-8 py-3 rounded-xl font-medium transition-colors flex items-center justify-center shrink-0">
+                                <i data-lucide="search" class="w-4 h-4 mr-2"></i> Buscar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -283,7 +310,7 @@
                                 <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Até 5 Fotos Alta Resolução</span></li>
                                 <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Exibição na busca padrão</span></li>
                             </ul>
-                            <button class="w-full py-4 rounded-xl font-medium transition-colors bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700">Assinar Basic</button>
+                            <button onclick="navigateTo('register')" class="w-full py-4 rounded-xl font-medium transition-colors bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700">Assinar Basic</button>
                         </div>
                         <!-- Plan Premium -->
                         <div class="relative rounded-2xl p-8 bg-zinc-900 border border-amber-500 shadow-2xl shadow-amber-900/20 transform md:-translate-y-4 flex flex-col">
@@ -302,7 +329,7 @@
                                 <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Destaque nas buscas (Selo Premium)</span></li>
                                 <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Estatísticas de Visitas</span></li>
                             </ul>
-                            <button class="w-full py-4 rounded-xl font-medium transition-colors bg-amber-600 hover:bg-amber-500 text-white">Assinar Premium</button>
+                            <button onclick="navigateTo('register')" class="w-full py-4 rounded-xl font-medium transition-colors bg-amber-600 hover:bg-amber-500 text-white">Assinar Premium</button>
                         </div>
                         <!-- Plan Diamond -->
                         <div class="relative rounded-2xl p-8 bg-zinc-900 border border-zinc-800 flex flex-col">
@@ -317,7 +344,7 @@
                                 <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Topo da Página Inicial</span></li>
                                 <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Divulgação Redes Sociais</span></li>
                             </ul>
-                            <button class="w-full py-4 rounded-xl font-medium transition-colors bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700">Assinar Diamond</button>
+                            <button onclick="navigateTo('register')" class="w-full py-4 rounded-xl font-medium transition-colors bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700">Assinar Diamond</button>
                         </div>
                     </div>
                 </div>
@@ -326,9 +353,166 @@
             <div class="max-w-4xl mx-auto px-4 py-20 text-center">
                 <h2 class="text-3xl font-serif text-white mb-6">Pronta para começar?</h2>
                 <p class="text-zinc-400 mb-10 text-lg">O processo de aprovação leva em média 24 horas. Exigimos verificação de identidade para garantir a segurança da plataforma e das anunciantes.</p>
-                <button class="bg-white text-zinc-950 hover:bg-zinc-200 px-10 py-4 rounded-full text-lg font-medium transition-colors">
+                <button onclick="navigateTo('register')" class="bg-white text-zinc-950 hover:bg-zinc-200 px-10 py-4 rounded-full text-lg font-medium transition-colors">
                     Criar Minha Conta de Anunciante
                 </button>
+            </div>
+        </div>
+
+        <!-- REGISTER VIEW (Formulário de Cadastro) -->
+        <div id="view-register" class="hidden fade-in">
+            <div class="bg-zinc-900 py-16 border-b border-zinc-800">
+                <div class="max-w-3xl mx-auto px-4 text-center">
+                    <h1 class="text-3xl md:text-5xl font-serif text-white mb-4">
+                        Faça parte da <span class="text-amber-500 italic">Élite.</span>
+                    </h1>
+                    <p class="text-zinc-400 font-light">Preencha o formulário abaixo com atenção. Seus dados pessoais estão seguros e não serão divulgados.</p>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto px-4 py-12">
+                <form id="registrationForm" onsubmit="submitRegistration(event)" class="space-y-10">
+                    
+                    <!-- DADOS PESSOAIS -->
+                    <div class="bg-zinc-900/50 p-6 sm:p-8 rounded-2xl border border-zinc-800">
+                        <h2 class="text-xl font-serif text-amber-500 mb-6 flex items-center border-b border-zinc-800 pb-3">
+                            <i data-lucide="user" class="w-5 h-5 mr-2"></i> Dados Pessoais & Contato
+                        </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="sm:col-span-2">
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">Nome Completo (Não será exibido)</label>
+                                <input type="text" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="Seu nome verdadeiro">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">CPF (Apenas para verificação)</label>
+                                <input type="text" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="000.000.000-00">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">Data de Nascimento</label>
+                                <input type="date" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-400 focus:text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all" style="color-scheme: dark;">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">Nome Artístico (Público)</label>
+                                <input type="text" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="Como quer ser chamada">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">WhatsApp de Trabalho</label>
+                                <input type="tel" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="(00) 90000-0000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ATRIBUTOS E LOCALIZAÇÃO -->
+                    <div class="bg-zinc-900/50 p-6 sm:p-8 rounded-2xl border border-zinc-800">
+                        <h2 class="text-xl font-serif text-amber-500 mb-6 flex items-center border-b border-zinc-800 pb-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-2"></i> Perfil & Localização
+                        </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">Gênero</label>
+                                <select required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all">
+                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="female">Mulher (Cis/Trans)</option>
+                                    <option value="male">Homem (Cis/Trans)</option>
+                                    <option value="other">Outro</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">Cachê Mínimo (Referência em R$)</label>
+                                <input type="number" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="Ex: 1500">
+                            </div>
+                            <div class="sm:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-zinc-400 mb-2">Altura</label>
+                                    <input type="text" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="1.70m">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-zinc-400 mb-2">Peso</label>
+                                    <input type="text" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="60kg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-zinc-400 mb-2">Olhos</label>
+                                    <input type="text" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="Verdes">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-zinc-400 mb-2">Cabelos</label>
+                                    <input type="text" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="Loiros">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">Estado</label>
+                                <select required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all">
+                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="OUTRO">Outro</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">Cidade Principal</label>
+                                <input type="text" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-zinc-600" placeholder="Sua cidade">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-sm font-medium text-zinc-400 mb-2">Uma breve descrição (Bio)</label>
+                                <textarea rows="3" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all placeholder-zinc-600 resize-none" placeholder="Conte um pouco sobre sua personalidade e o que os clientes podem esperar..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FOTOS E VERIFICAÇÃO -->
+                    <div class="bg-zinc-900/50 p-6 sm:p-8 rounded-2xl border border-zinc-800">
+                        <h2 class="text-xl font-serif text-amber-500 mb-6 flex items-center border-b border-zinc-800 pb-3">
+                            <i data-lucide="camera" class="w-5 h-5 mr-2"></i> Mídia & Segurança
+                        </h2>
+                        <div class="grid grid-cols-1 gap-6">
+                            
+                            <!-- Foto de Perfil -->
+                            <div>
+                                <label class="block text-sm font-medium text-white mb-1">Fotos para o Perfil (Até 5 fotos)</label>
+                                <p class="text-xs text-zinc-500 mb-3">Envie fotos com boa iluminação, sem excesso de filtros.</p>
+                                <div class="flex items-center justify-center w-full">
+                                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-zinc-700 border-dashed rounded-xl cursor-pointer bg-zinc-950/50 hover:bg-zinc-900 transition-colors">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <i data-lucide="upload-cloud" class="w-8 h-8 text-zinc-500 mb-2"></i>
+                                            <p class="text-sm text-zinc-400"><span class="font-semibold text-amber-500">Clique para selecionar</span> ou arraste</p>
+                                        </div>
+                                        <input type="file" class="hidden" multiple accept="image/*" />
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Foto de Verificação -->
+                            <div class="bg-amber-900/10 border border-amber-900/30 p-4 rounded-xl">
+                                <label class="block text-sm font-medium text-amber-500 mb-1 flex items-center">
+                                    <i data-lucide="shield-check" class="w-4 h-4 mr-2"></i> Foto de Verificação (Obrigatório)
+                                </label>
+                                <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Para garantir a segurança de todos e conceder o selo de perfil real, envie uma foto sua segurando seu documento de identidade (RG ou CNH) próximo ao rosto. <strong>Esta foto é confidencial e nunca será publicada.</strong></p>
+                                <input type="file" required class="block w-full text-sm text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-amber-600 file:text-white hover:file:bg-amber-500 cursor-pointer"/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- CONSENTIMENTO -->
+                    <div class="flex items-start space-x-3">
+                        <div class="flex items-center h-5">
+                            <input id="terms" type="checkbox" required class="w-5 h-5 bg-zinc-950 border-zinc-800 rounded accent-amber-500 focus:ring-amber-500">
+                        </div>
+                        <label for="terms" class="text-sm text-zinc-400">
+                            Declaro que sou maior de 18 anos e concordo com os <a href="#" class="text-amber-500 hover:underline">Termos de Uso</a> e <a href="#" class="text-amber-500 hover:underline">Política de Privacidade</a> da plataforma Élite.
+                        </label>
+                    </div>
+
+                    <!-- BOTAO ENVIAR -->
+                    <div id="registerStatus" class="hidden rounded-xl p-4 text-center"></div>
+
+                    <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-medium py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-amber-500/20 text-lg flex justify-center items-center">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> Enviar Solicitação de Cadastro
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -561,7 +745,7 @@
         // --- NAVIGATION & UI TOGGLES ---
         function navigateTo(viewId) {
             // Hide all views
-            ['view-home', 'view-profile', 'view-advertise', 'view-howItWorks'].forEach(id => {
+            ['view-home', 'view-profile', 'view-advertise', 'view-howItWorks', 'view-register'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
             });
             // Show target
@@ -971,6 +1155,27 @@
                 </div>
             `;
             lucide.createIcons();
+        }
+
+        // --- FUNCIONALIDADE: ENVIO DO FORMULARIO DE CADASTRO ---
+        function submitRegistration(event) {
+            event.preventDefault();
+            const statusDiv = document.getElementById('registerStatus');
+            statusDiv.classList.remove('hidden');
+            statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
+            statusDiv.innerHTML = `
+                <div class="flex flex-col items-center justify-center">
+                    <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
+                    <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
+                    <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
+                </div>
+            `;
+            lucide.createIcons();
+            
+            // Simula um reset do form apos envio e leitura
+            setTimeout(() => {
+                document.getElementById('registrationForm').reset();
+            }, 1000);
         }
     </script>
 </body>
