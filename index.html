@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Élite | Acompanhantes de Luxo</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: #09090b; /* zinc-950 */
+            color: #e4e4e7; /* zinc-200 */
+        }
+        ::selection {
+            background-color: #f59e0b; /* amber-500 */
+            color: #18181b; /* zinc-900 */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer group" onclick="navigateTo('home')">
+                    <i data-lucide="diamond" class="w-8 h-8 text-amber-500 group-hover:text-amber-400 transition-colors"></i>
+                    <span class="ml-2 text-2xl font-serif tracking-widest text-white uppercase">
+                        Élite<span class="text-amber-500">.</span>
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-btn text-sm tracking-wide text-amber-500 hover:text-amber-500 transition-colors">ACOMPANHANTES</button>
+                    <button onclick="navigateTo('howItWorks')" id="nav-howItWorks" class="nav-btn text-sm tracking-wide text-zinc-400 hover:text-amber-500 transition-colors">COMO FUNCIONA</button>
+                    <button onclick="navigateTo('advertise')" id="nav-advertise" class="nav-btn px-5 py-2.5 rounded-full border border-amber-600/50 text-amber-500 text-sm font-medium hover:bg-amber-600 hover:text-white transition-all duration-300">SOU MODELO (ANUNCIE)</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-zinc-400 hover:text-white">
+                        <i data-lucide="menu" id="mobile-menu-icon" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-b border-zinc-800 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <button onclick="navigateTo('home')" class="text-left py-3 text-lg border-b border-zinc-800/50 text-amber-500">Acompanhantes</button>
+                <button onclick="navigateTo('howItWorks')" class="text-left py-3 text-lg border-b border-zinc-800/50 text-zinc-300">Como Funciona</button>
+                <button onclick="navigateTo('advertise')" class="mt-4 w-full bg-amber-600 text-white py-3 rounded-md font-medium text-lg text-center">Sou Modelo (Anuncie)</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-20 pb-24 min-h-screen">
+        
+        <!-- HOME VIEW -->
+        <div id="view-home" class="fade-in block">
+            <!-- Hero -->
+            <div class="relative h-[50vh] min-h-[450px] flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0">
+                    <img src="https://images.unsplash.com/photo-1576485290814-1c72ea4ccbab?auto=format&fit=crop&w=1920&q=80" alt="Luxury background" class="w-full h-full object-cover opacity-20">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-transparent to-zinc-950"></div>
+                </div>
+                <div class="relative z-10 text-center px-4 max-w-3xl w-full">
+                    <h1 class="text-4xl md:text-6xl font-serif text-white mb-6 leading-tight">
+                        Encontre a <span class="text-amber-500 italic">Companhia Perfeita</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-zinc-400 mb-10 font-light hidden sm:block">
+                        O diretório mais exclusivo e sofisticado do Brasil. Discrição, beleza e elegância.
+                    </p>
+                    <div class="flex flex-col sm:flex-row max-w-2xl mx-auto bg-zinc-900/80 backdrop-blur-md p-2 rounded-xl border border-zinc-800 shadow-2xl">
+                        <div class="flex-1 flex items-center px-4 py-3 border-b sm:border-b-0 sm:border-r border-zinc-700/50">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-zinc-500 mr-3 shrink-0"></i>
+                            <input type="text" id="searchInput" placeholder="Busque por cidade, bairro ou nome..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-zinc-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="border-y border-zinc-800/50 bg-zinc-950 sticky top-20 z-40">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="flex items-center space-x-2 overflow-x-auto pb-2 sm:pb-0 hide-scrollbar w-full sm:w-auto" id="category-tabs">
+                        <button onclick="setCategory('todas')" data-cat="todas" class="cat-btn px-5 py-1.5 rounded-full border text-sm transition-colors whitespace-nowrap bg-amber-600 border-amber-500 text-white">Todas</button>
+                        <button onclick="setCategory('vips')" data-cat="vips" class="cat-btn px-5 py-1.5 rounded-full border text-sm transition-colors whitespace-nowrap flex items-center bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-amber-500"><i data-lucide="crown" class="w-3 h-3 mr-1"></i> VIPs</button>
+                        <button onclick="setCategory('novas')" data-cat="novas" class="cat-btn px-5 py-1.5 rounded-full border text-sm transition-colors whitespace-nowrap flex items-center bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-amber-500"><i data-lucide="star" class="w-3 h-3 mr-1"></i> Novas</button>
+                        <button onclick="setCategory('viagens')" data-cat="viagens" class="cat-btn px-5 py-1.5 rounded-full border text-sm transition-colors whitespace-nowrap bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-amber-500">Viagens</button>
+                    </div>
+                    <button onclick="toggleAdvancedFilters()" id="adv-filter-btn" class="flex items-center text-sm transition-colors w-full sm:w-auto justify-center sm:justify-start py-2 sm:py-0 border-t border-zinc-800 sm:border-0 text-zinc-400 hover:text-amber-500">
+                        <i data-lucide="filter" class="w-4 h-4 mr-2"></i> Filtros Avançados
+                    </button>
+                </div>
+
+                <!-- Advanced Filters Panel -->
+                <div id="advanced-filters" class="hidden border-t border-zinc-800 bg-zinc-900/50 px-4 py-6">
+                    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 items-end">
+                        <div>
+                            <label class="block text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Estado</label>
+                            <select id="stateFilter" class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                                <option value="all">Todos os Estados</option>
+                                <!-- Populate via JS -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Cidade</label>
+                            <select id="cityFilter" disabled class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                                <option value="all">Todas as Cidades</option>
+                                <!-- Populate via JS -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Gênero</label>
+                            <select id="genderFilter" class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                                <option value="all">Ambos</option>
+                                <option value="female">Mulheres</option>
+                                <option value="male">Homens</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Idade</label>
+                            <select id="ageFilter" class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                                <option value="all">Qualquer Idade</option>
+                                <option value="18-23">18 a 23 anos</option>
+                                <option value="24-29">24 a 29 anos</option>
+                                <option value="30+">Acima de 30 anos</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">Cachê Máximo</label>
+                            <select id="priceFilter" class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                                <option value="all">Qualquer Valor</option>
+                                <option value="1500">Até R$ 1.500</option>
+                                <option value="2000">Até R$ 2.000</option>
+                                <option value="3000">Até R$ 3.000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="max-w-7xl mx-auto flex justify-end mt-4">
+                        <button onclick="resetFilters()" class="px-6 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors w-full md:w-auto text-sm">Limpar Filtros</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Models Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="flex justify-between items-end mb-8">
+                    <h2 id="grid-title" class="text-2xl font-serif text-white">Destaques da Semana</h2>
+                    <span id="grid-count" class="text-sm text-zinc-500"></span>
+                </div>
+                
+                <div id="models-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cards via JS -->
+                </div>
+
+                <div id="empty-state" class="hidden text-center py-20 bg-zinc-900/50 rounded-2xl border border-dashed border-zinc-800">
+                    <i data-lucide="filter" class="w-12 h-12 text-zinc-600 mx-auto mb-4"></i>
+                    <h3 class="text-xl text-white mb-2">Nenhum perfil encontrado</h3>
+                    <p class="text-zinc-500 mb-6">Tente ajustar seus filtros ou mudar o termo da busca.</p>
+                    <button onclick="resetFilters()" class="px-6 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors">Ver Todas as Modelos</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFILE VIEW -->
+        <div id="view-profile" class="hidden fade-in">
+            <!-- Profile Container via JS -->
+        </div>
+
+        <!-- ADVERTISE VIEW -->
+        <div id="view-advertise" class="hidden fade-in">
+            <div class="bg-zinc-900 py-20 border-b border-zinc-800">
+                <div class="max-w-4xl mx-auto px-4 text-center">
+                    <h1 class="text-4xl md:text-5xl font-serif text-white mb-6">
+                        Eleve seu padrão. <span class="text-amber-500 italic">Anuncie na Élite.</span>
+                    </h1>
+                    <p class="text-xl text-zinc-400 font-light leading-relaxed">
+                        Conectamos profissionais independentes de alto padrão aos clientes mais exigentes do mercado. 
+                        Mais visibilidade, mais segurança e clientes qualificados para você.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6">
+                            <i data-lucide="shield" class="w-8 h-8 text-amber-500"></i>
+                        </div>
+                        <h3 class="text-xl text-white font-medium mb-3">Discrição e Segurança</h3>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Seus dados e privacidade levados a sério. Ambiente seguro para anunciar seus serviços com tranquilidade.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6">
+                            <i data-lucide="crown" class="w-8 h-8 text-amber-500"></i>
+                        </div>
+                        <h3 class="text-xl text-white font-medium mb-3">Público Qualificado</h3>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Nossa plataforma foca em executivos, empresários e turistas de alto poder aquisitivo.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6">
+                            <i data-lucide="star" class="w-8 h-8 text-amber-500"></i>
+                        </div>
+                        <h3 class="text-xl text-white font-medium mb-3">Retorno Garantido</h3>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Plataforma otimizada para SEO, garantindo que seu perfil seja encontrado facilmente no Google.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-zinc-950 py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-serif text-white mb-4">Escolha o plano ideal para você</h2>
+                        <p class="text-zinc-400">Assinaturas mensais sem fidelidade. Cancele quando quiser.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                        <!-- Plan Basic -->
+                        <div class="relative rounded-2xl p-8 bg-zinc-900 border border-zinc-800 flex flex-col">
+                            <i data-lucide="heart" class="w-8 h-8 text-amber-500 mb-4"></i>
+                            <h3 class="text-2xl font-serif text-white mb-2">Basic</h3>
+                            <div class="flex items-baseline mb-8">
+                                <span class="text-4xl font-bold text-white">R$ 199</span>
+                                <span class="text-zinc-500 ml-1">/mês</span>
+                            </div>
+                            <ul class="space-y-4 mb-8 flex-1">
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Perfil Completo</span></li>
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Até 5 Fotos Alta Resolução</span></li>
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Exibição na busca padrão</span></li>
+                            </ul>
+                            <button class="w-full py-4 rounded-xl font-medium transition-colors bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700">Assinar Basic</button>
+                        </div>
+                        <!-- Plan Premium -->
+                        <div class="relative rounded-2xl p-8 bg-zinc-900 border border-amber-500 shadow-2xl shadow-amber-900/20 transform md:-translate-y-4 flex flex-col">
+                            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                <span class="bg-amber-500 text-zinc-950 text-xs font-bold px-4 py-1 rounded-full uppercase tracking-widest shadow-lg">Mais Escolhido</span>
+                            </div>
+                            <i data-lucide="crown" class="w-8 h-8 text-amber-500 mb-4"></i>
+                            <h3 class="text-2xl font-serif text-white mb-2">Premium</h3>
+                            <div class="flex items-baseline mb-8">
+                                <span class="text-4xl font-bold text-white">R$ 399</span>
+                                <span class="text-zinc-500 ml-1">/mês</span>
+                            </div>
+                            <ul class="space-y-4 mb-8 flex-1">
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Perfil Completo c/ Vídeo</span></li>
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Até 15 Fotos Alta Resolução</span></li>
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Destaque nas buscas (Selo Premium)</span></li>
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Estatísticas de Visitas</span></li>
+                            </ul>
+                            <button class="w-full py-4 rounded-xl font-medium transition-colors bg-amber-600 hover:bg-amber-500 text-white">Assinar Premium</button>
+                        </div>
+                        <!-- Plan Diamond -->
+                        <div class="relative rounded-2xl p-8 bg-zinc-900 border border-zinc-800 flex flex-col">
+                            <i data-lucide="diamond" class="w-8 h-8 text-amber-500 mb-4"></i>
+                            <h3 class="text-2xl font-serif text-white mb-2">Diamond VIP</h3>
+                            <div class="flex items-baseline mb-8">
+                                <span class="text-4xl font-bold text-white">R$ 799</span>
+                                <span class="text-zinc-500 ml-1">/mês</span>
+                            </div>
+                            <ul class="space-y-4 mb-8 flex-1">
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Fotos Ilimitadas & Múltiplos Vídeos</span></li>
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Topo da Página Inicial</span></li>
+                                <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i><span class="text-zinc-300 text-sm">Divulgação Redes Sociais</span></li>
+                            </ul>
+                            <button class="w-full py-4 rounded-xl font-medium transition-colors bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700">Assinar Diamond</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto px-4 py-20 text-center">
+                <h2 class="text-3xl font-serif text-white mb-6">Pronta para começar?</h2>
+                <p class="text-zinc-400 mb-10 text-lg">O processo de aprovação leva em média 24 horas. Exigimos verificação de identidade para garantir a segurança da plataforma e das anunciantes.</p>
+                <button class="bg-white text-zinc-950 hover:bg-zinc-200 px-10 py-4 rounded-full text-lg font-medium transition-colors">
+                    Criar Minha Conta de Anunciante
+                </button>
+            </div>
+        </div>
+
+        <!-- HOW IT WORKS VIEW -->
+        <div id="view-howItWorks" class="hidden fade-in">
+            <div class="bg-zinc-900 py-20 border-b border-zinc-800">
+                <div class="max-w-4xl mx-auto px-4 text-center">
+                    <h1 class="text-4xl md:text-5xl font-serif text-white mb-6">
+                        Como funciona a <span class="text-amber-500 italic">Élite</span>?
+                    </h1>
+                    <p class="text-xl text-zinc-400 font-light leading-relaxed">
+                        Somos um diretório classificado focado na transparência e conexão direta. 
+                        Descubra o passo a passo de como encontrar a companhia ideal sem intermediários.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="space-y-16">
+                    <!-- STEP 1 -->
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="md:w-1/2 text-center md:text-right">
+                            <span class="text-amber-500 font-bold tracking-widest uppercase text-sm mb-2 block">Passo 1</span>
+                            <h3 class="text-2xl font-serif text-white mb-4">Explore e Filtre</h3>
+                            <p class="text-zinc-400 leading-relaxed">
+                                Utilize nossa busca avançada para encontrar modelos na sua cidade. Filtre por VIPs, novidades ou características. Todos os perfis são verificados por nossa equipe.
+                            </p>
+                        </div>
+                        <div class="md:w-1/2 flex justify-center md:justify-start">
+                            <div class="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shadow-lg shadow-black/50">
+                                <i data-lucide="search" class="w-10 h-10 text-amber-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- STEP 2 -->
+                    <div class="flex flex-col md:flex-row-reverse items-center gap-8">
+                        <div class="md:w-1/2 text-center md:text-left">
+                            <span class="text-amber-500 font-bold tracking-widest uppercase text-sm mb-2 block">Passo 2</span>
+                            <h3 class="text-2xl font-serif text-white mb-4">Contato Direto</h3>
+                            <p class="text-zinc-400 leading-relaxed">
+                                Nós não somos uma agência. Quando você encontrar um perfil que lhe interesse, você entrará em contato <strong>diretamente com a modelo</strong>.
+                            </p>
+                        </div>
+                        <div class="md:w-1/2 flex justify-center md:justify-end">
+                            <div class="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shadow-lg shadow-black/50">
+                                <i data-lucide="message-circle" class="w-10 h-10 text-amber-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- STEP 3 -->
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="md:w-1/2 text-center md:text-right">
+                            <span class="text-amber-500 font-bold tracking-widest uppercase text-sm mb-2 block">Passo 3</span>
+                            <h3 class="text-2xl font-serif text-white mb-4">Combine os Detalhes</h3>
+                            <p class="text-zinc-400 leading-relaxed">
+                                Combine o local, o tipo de serviço desejado (jantar, viagem, evento) e o valor final do cachê diretamente com a profissional.
+                            </p>
+                        </div>
+                        <div class="md:w-1/2 flex justify-center md:justify-start">
+                            <div class="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shadow-lg shadow-black/50">
+                                <i data-lucide="calendar-heart" class="w-10 h-10 text-amber-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-amber-900/10 border-t border-b border-amber-900/30 py-16">
+                <div class="max-w-4xl mx-auto px-4">
+                    <div class="flex items-start space-x-4">
+                        <i data-lucide="alert-triangle" class="w-8 h-8 text-amber-500 shrink-0 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-serif text-white mb-3">Boas Práticas e Regras</h3>
+                            <ul class="space-y-3 text-zinc-400 text-sm leading-relaxed">
+                                <li>• <strong>Respeito Acima de Tudo:</strong> O consentimento é a regra número um. Qualquer comportamento abusivo não será tolerado.</li>
+                                <li>• <strong>Sigilo e Discrição:</strong> A privacidade de ambas as partes deve ser mantida sob o mais absoluto sigilo.</li>
+                                <li>• <strong>Pagamentos:</strong> Não cobramos comissão. Acertos financeiros são exclusivos entre cliente e profissional.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-zinc-950 border-t border-zinc-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <i data-lucide="diamond" class="w-6 h-6 text-amber-500"></i>
+                    <span class="ml-2 text-xl font-serif tracking-widest text-zinc-400 uppercase">Élite.</span>
+                </div>
+                <div class="flex space-x-6 text-sm text-zinc-500">
+                    <a href="#" class="hover:text-amber-500 transition-colors">Termos de Uso</a>
+                    <a href="#" class="hover:text-amber-500 transition-colors">Privacidade</a>
+                    <a href="#" class="hover:text-amber-500 transition-colors">Contato</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-zinc-900/50 text-center md:text-left text-xs text-zinc-600 max-w-4xl">
+                <p class="mb-2"><strong>Aviso Importante:</strong> Este site é um diretório de publicidade. Todas as modelos anunciantes são profissionais independentes e afirmam ter 18 anos de idade ou mais no momento do registro. Não agenciamos, não intermediamos pagamentos e não nos responsabilizamos pelos serviços prestados pelas anunciantes.</p>
+                <p>© 2026 Élite Diretório de Acompanhantes de Luxo. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIC (JavaScript) -->
+    <script>
+        // --- MOCK DATA ---
+        const MODELS = [
+            {
+                id: 1, name: 'Valentina', age: 24, gender: 'female', location: 'São Paulo, SP - Jardins', state: 'SP', city: 'São Paulo', price: 'A partir de R$ 1.500', priceValue: 1500,
+                image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+                cover: 'https://images.unsplash.com/photo-1517260739337-6799d239ce83?auto=format&fit=crop&w=1200&q=80',
+                gallery: ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80', 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80'],
+                videos: ['https://images.unsplash.com/photo-1618018357910-1c5c0d64db97?auto=format&fit=crop&w=400&q=80'],
+                comments: [{ id: 1, user: 'Carlos M.', text: 'Companhia maravilhosa, muito educada e elegante.', date: '12/03/2026' }],
+                stats: { height: '1.72m', weight: '58kg', eyes: 'Verdes', hair: 'Castanho' }, services: ['Jantares', 'Eventos Sociais', 'Viagens Nacionais', 'Finais de Semana'],
+                bio: 'Elegância e sofisticação para momentos inesquecíveis. Sou uma companhia culta, adoro bons vinhos e conversas envolventes. Perfeita para te acompanhar naquele jantar de negócios ou uma viagem relaxante.',
+                isVip: true, isNew: false, phone: '+5511999990001'
+            },
+            {
+                id: 2, name: 'Isabella', age: 27, gender: 'female', location: 'Rio de Janeiro, RJ - Leblon', state: 'RJ', city: 'Rio de Janeiro', price: 'A partir de R$ 2.000', priceValue: 2000,
+                image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
+                cover: 'https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=1200&q=80',
+                gallery: ['https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?auto=format&fit=crop&w=400&q=80'],
+                videos: [], comments: [{ id: 1, user: 'Anônimo', text: 'Presença incrível nos eventos, recomendo de olhos fechados.', date: '15/03/2026' }],
+                stats: { height: '1.68m', weight: '55kg', eyes: 'Castanhos', hair: 'Ruivo' }, services: ['Viagens Internacionais', 'Festas de Gala', 'Companhia VIP'],
+                bio: 'Extrovertida, apaixonada por arte e alta gastronomia. Garanto uma presença marcante e discreta onde quer que formos. Falo inglês e espanhol fluentes.',
+                isVip: true, isNew: true, phone: '+5521999990002'
+            },
+            {
+                id: 3, name: 'Camila', age: 22, gender: 'female', location: 'Belo Horizonte, MG - Savassi', state: 'MG', city: 'Belo Horizonte', price: 'A partir de R$ 1.200', priceValue: 1200,
+                image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80',
+                cover: 'https://images.unsplash.com/photo-1560624052-449f5ddf0c31?auto=format&fit=crop&w=1200&q=80',
+                gallery: ['https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&w=400&q=80'],
+                videos: [], comments: [],
+                stats: { height: '1.65m', weight: '52kg', eyes: 'Mel', hair: 'Loiro' }, services: ['Happy Hour', 'Jantares Românticos', 'Cinemas e Shows'],
+                bio: 'Doce, atenciosa e muito carinhosa. A companhia perfeita para te fazer esquecer do estresse do dia a dia. Momentos de puro relaxamento e diversão.',
+                isVip: false, isNew: true, phone: '+5531999990003'
+            },
+            {
+                id: 4, name: 'Sophia', age: 25, gender: 'female', location: 'Curitiba, PR - Batel', state: 'PR', city: 'Curitiba', price: 'A partir de R$ 1.800', priceValue: 1800,
+                image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80',
+                cover: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=1200&q=80',
+                gallery: [], videos: [], comments: [{ id: 1, user: 'João P.', text: 'Muito elegante e inteligente, conversa excelente.', date: '10/02/2026' }],
+                stats: { height: '1.75m', weight: '60kg', eyes: 'Azuis', hair: 'Loiro' }, services: ['Eventos Corporativos', 'Viagens de Negócios', 'Degustação de Vinhos'],
+                bio: 'Misteriosa e envolvente. Sou a escolha certa para quem busca uma mulher de atitude, com excelente nível cultural para qualquer tipo de evento de alto padrão.',
+                isVip: true, isNew: false, phone: '+5541999990004'
+            },
+            {
+                id: 7, name: 'Leonardo', age: 30, gender: 'male', location: 'São Paulo, SP - Itaim Bibi', state: 'SP', city: 'São Paulo', price: 'A partir de R$ 1.800', priceValue: 1800,
+                image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
+                cover: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+                gallery: ['https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80'],
+                videos: [], comments: [{ id: 1, user: 'Marcela T.', text: 'Um verdadeiro cavalheiro. Me acompanhou em um casamento e foi perfeito.', date: '20/03/2026' }],
+                stats: { height: '1.85m', weight: '82kg', eyes: 'Castanhos', hair: 'Castanho Escuro' }, services: ['Eventos Corporativos', 'Jantares', 'Viagens Internacionais'],
+                bio: 'Presença marcante e cavalheirismo em primeiro lugar. Especialista em acompanhar executivas e empresárias em eventos sociais, viagens de negócios ou momentos de puro relaxamento.',
+                isVip: true, isNew: false, phone: '+5511999990007'
+            }
+        ];
+
+        // --- STATE ---
+        let state = {
+            category: 'todas',
+            search: '',
+            state: 'all',
+            city: 'all',
+            gender: 'all',
+            age: 'all',
+            price: 'all'
+        };
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            populateLocations();
+            renderGrid();
+            
+            // Search Input Event
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                state.search = e.target.value.toLowerCase();
+                renderGrid();
+            });
+
+            // Select Events
+            ['stateFilter', 'cityFilter', 'genderFilter', 'ageFilter', 'priceFilter'].forEach(id => {
+                document.getElementById(id).addEventListener('change', (e) => {
+                    if (id === 'stateFilter') {
+                        state.state = e.target.value;
+                        state.city = 'all'; // Reset city on state change
+                        updateCityDropdown();
+                    } else {
+                        state[id.replace('Filter', '')] = e.target.value;
+                    }
+                    renderGrid();
+                });
+            });
+        });
+
+        // --- NAVIGATION & UI TOGGLES ---
+        function navigateTo(viewId) {
+            // Hide all views
+            ['view-home', 'view-profile', 'view-advertise', 'view-howItWorks'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            // Show target
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+            
+            // Update Nav styling
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.replace('text-amber-500', 'text-zinc-400'));
+            if(document.getElementById(`nav-${viewId}`)) {
+                document.getElementById(`nav-${viewId}`).classList.replace('text-zinc-400', 'text-amber-500');
+            }
+            
+            // Close mobile menu
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function toggleAdvancedFilters() {
+            const panel = document.getElementById('advanced-filters');
+            const isHidden = panel.classList.contains('hidden');
+            panel.classList.toggle('hidden');
+            const btn = document.getElementById('adv-filter-btn');
+            btn.innerHTML = `<i data-lucide="filter" class="w-4 h-4 mr-2"></i> ${isHidden ? 'Ocultar Filtros' : 'Filtros Avançados'}`;
+            btn.classList.toggle('text-amber-500');
+            btn.classList.toggle('text-zinc-400');
+            lucide.createIcons();
+        }
+
+        function setCategory(cat) {
+            state.category = cat;
+            // Update tab styles
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = "cat-btn px-5 py-1.5 rounded-full border text-sm transition-colors whitespace-nowrap flex items-center bg-amber-600 border-amber-500 text-white";
+                } else {
+                    btn.className = "cat-btn px-5 py-1.5 rounded-full border text-sm transition-colors whitespace-nowrap flex items-center bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-amber-500";
+                }
+            });
+            renderGrid();
+        }
+
+        // --- FILTERING LOGIC ---
+        function resetFilters() {
+            state = { category: 'todas', search: '', state: 'all', city: 'all', gender: 'all', age: 'all', price: 'all' };
+            document.getElementById('searchInput').value = '';
+            document.getElementById('stateFilter').value = 'all';
+            document.getElementById('genderFilter').value = 'all';
+            document.getElementById('ageFilter').value = 'all';
+            document.getElementById('priceFilter').value = 'all';
+            updateCityDropdown();
+            setCategory('todas');
+        }
+
+        function populateLocations() {
+            const states = [...new Set(MODELS.map(m => m.state))].sort();
+            const stateSelect = document.getElementById('stateFilter');
+            states.forEach(s => stateSelect.innerHTML += `<option value="${s}">${s}</option>`);
+            updateCityDropdown();
+        }
+
+        function updateCityDropdown() {
+            const citySelect = document.getElementById('cityFilter');
+            citySelect.innerHTML = '<option value="all">Todas as Cidades</option>';
+            
+            if (state.state === 'all') {
+                citySelect.disabled = true;
+            } else {
+                citySelect.disabled = false;
+                const cities = [...new Set(MODELS.filter(m => m.state === state.state).map(m => m.city))].sort();
+                cities.forEach(c => citySelect.innerHTML += `<option value="${c}">${c}</option>`);
+            }
+            citySelect.value = state.city;
+        }
+
+        function getFilteredModels() {
+            return MODELS.filter(m => {
+                if (state.search && !m.location.toLowerCase().includes(state.search) && !m.name.toLowerCase().includes(state.search)) return false;
+                if (state.gender !== 'all' && m.gender !== state.gender) return false;
+                if (state.state !== 'all' && m.state !== state.state) return false;
+                if (state.city !== 'all' && m.city !== state.city) return false;
+                if (state.category === 'vips' && !m.isVip) return false;
+                if (state.category === 'novas' && !m.isNew) return false;
+                if (state.category === 'viagens' && !m.services.some(s => s.toLowerCase().includes('viage'))) return false;
+                if (state.price !== 'all' && m.priceValue > parseInt(state.price)) return false;
+                
+                if (state.age !== 'all') {
+                    if (state.age === '18-23' && (m.age < 18 || m.age > 23)) return false;
+                    if (state.age === '24-29' && (m.age < 24 || m.age > 29)) return false;
+                    if (state.age === '30+' && m.age < 30) return false;
+                }
+                return true;
+            });
+        }
+
+        // --- RENDERING ---
+        function renderGrid() {
+            const filtered = getFilteredModels();
+            const grid = document.getElementById('models-grid');
+            const emptyState = document.getElementById('empty-state');
+            
+            // Update Title
+            const titleEl = document.getElementById('grid-title');
+            if (state.search) titleEl.innerText = 'Resultados da Busca';
+            else if (state.category === 'vips') titleEl.innerText = 'Modelos VIP Exclusivos';
+            else if (state.category === 'novas') titleEl.innerText = 'Novidades na Plataforma';
+            else if (state.category === 'viagens') titleEl.innerText = 'Disponíveis para Viagens';
+            else titleEl.innerText = 'Destaques da Semana';
+
+            document.getElementById('grid-count').innerText = `${filtered.length} perfis encontrados`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                grid.innerHTML = filtered.map(model => `
+                    <div onclick="openProfile(${model.id})" class="group cursor-pointer rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 transition-all duration-500 shadow-lg hover:shadow-amber-900/20">
+                        <div class="relative aspect-[3/4] overflow-hidden bg-zinc-800">
+                            <img src="${model.image}" alt="${model.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+                            
+                            <div class="absolute top-4 left-4 flex flex-col gap-2">
+                                ${model.isVip ? `<span class="bg-amber-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center shadow-lg"><i data-lucide="crown" class="w-3 h-3 mr-1"></i> VIP</span>` : ''}
+                                ${model.isNew ? `<span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center shadow-lg"><i data-lucide="star" class="w-3 h-3 mr-1"></i> Nova</span>` : ''}
+                            </div>
+
+                            <div class="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                <div>
+                                    <h3 class="text-2xl font-serif text-white mb-1 flex items-center">
+                                        ${model.name}, ${model.age} <i data-lucide="shield" class="w-4 h-4 ml-2 text-blue-400" title="Verificado"></i>
+                                    </h3>
+                                    <p class="text-zinc-300 text-sm flex items-center font-light">
+                                        <i data-lucide="map-pin" class="w-3 h-3 mr-1 text-amber-500"></i> ${model.city}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                lucide.createIcons();
+            }
+        }
+
+        function openProfile(id) {
+            const model = MODELS.find(m => m.id === id);
+            const container = document.getElementById('view-profile');
+            
+            let servicesHTML = model.services.map(s => `
+                <span class="px-4 py-2 rounded-full bg-zinc-900 border border-zinc-700/50 text-zinc-300 text-sm flex items-center">
+                    <i data-lucide="star" class="w-3 h-3 text-amber-500 mr-2"></i> ${s}
+                </span>`).join('');
+            
+            let mediaHTML = '';
+            if(!model.gallery.length && !model.videos.length) {
+                mediaHTML = `<p class="text-zinc-500 font-light italic">Nenhuma mídia adicional cadastrada.</p>`;
+            } else {
+                mediaHTML = `<div class="grid grid-cols-2 sm:grid-cols-3 gap-4">`;
+                model.videos.forEach(v => {
+                    mediaHTML += `
+                    <div class="relative aspect-square rounded-xl overflow-hidden group border border-zinc-800">
+                        <img src="${v}" class="w-full h-full object-cover opacity-70">
+                        <div class="absolute inset-0 flex items-center justify-center"><i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i></div>
+                    </div>`;
+                });
+                model.gallery.forEach(img => {
+                    mediaHTML += `
+                    <div class="relative aspect-square rounded-xl overflow-hidden border border-zinc-800">
+                        <img src="${img}" class="w-full h-full object-cover">
+                    </div>`;
+                });
+                mediaHTML += `</div>`;
+            }
+
+            let commentsHTML = '';
+            if(model.comments.length === 0) {
+                commentsHTML = `<p class="text-zinc-500 text-sm italic">Nenhuma avaliação aprovada ainda.</p>`;
+            } else {
+                commentsHTML = model.comments.map(c => `
+                    <div class="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800/50 mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-white flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-500 mr-1"></i> ${c.user}</span>
+                            <span class="text-xs text-zinc-500">${c.date}</span>
+                        </div>
+                        <p class="text-zinc-300 text-sm italic">"${c.text}"</p>
+                    </div>
+                `).join('');
+            }
+
+            container.innerHTML = `
+                <!-- COVER -->
+                <div class="relative h-[40vh] min-h-[300px] w-full bg-zinc-900">
+                    <img src="${model.cover}" class="w-full h-full object-cover opacity-40 mix-blend-overlay">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/60 to-zinc-950"></div>
+                    <button onclick="navigateTo('home')" class="absolute top-8 left-4 md:left-8 flex items-center text-zinc-300 hover:text-white bg-zinc-900/50 hover:bg-zinc-800/80 px-4 py-2 rounded-full backdrop-blur-md transition-all z-10">
+                        <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i> Voltar
+                    </button>
+                </div>
+                <!-- CONTENT -->
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-10 pb-20">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        
+                        <!-- Left col -->
+                        <div class="w-full md:w-1/3 flex flex-col gap-6">
+                            <div class="rounded-2xl overflow-hidden border-2 border-zinc-800 shadow-2xl shadow-black">
+                                <img src="${model.image}" class="w-full aspect-[3/4] object-cover">
+                            </div>
+                            <div class="bg-zinc-900/80 backdrop-blur-md rounded-2xl p-6 border border-zinc-800/50">
+                                <div class="flex items-center space-x-2 text-blue-400 bg-blue-400/10 p-3 rounded-xl mb-4">
+                                    <i data-lucide="shield" class="w-5 h-5"></i>
+                                    <span class="text-sm font-medium">Fotos 100% Verificadas</span>
+                                </div>
+                                <h4 class="text-xs uppercase tracking-wider text-zinc-500 mb-3">Atributos</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex justify-between text-sm"><span class="text-zinc-400">Altura</span><span class="text-white font-medium">${model.stats.height}</span></li>
+                                    <li class="flex justify-between text-sm"><span class="text-zinc-400">Peso</span><span class="text-white font-medium">${model.stats.weight}</span></li>
+                                    <li class="flex justify-between text-sm"><span class="text-zinc-400">Olhos</span><span class="text-white font-medium">${model.stats.eyes}</span></li>
+                                    <li class="flex justify-between text-sm"><span class="text-zinc-400">Cabelos</span><span class="text-white font-medium">${model.stats.hair}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Right col -->
+                        <div class="w-full md:w-2/3 pt-4 md:pt-32">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-6">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <h1 class="text-4xl md:text-5xl font-serif text-white">${model.name}, ${model.age}</h1>
+                                        ${model.isVip ? `<i data-lucide="crown" class="w-6 h-6 text-amber-500"></i>` : ''}
+                                    </div>
+                                    <p class="text-lg text-amber-500 flex items-center font-light"><i data-lucide="map-pin" class="w-5 h-5 mr-1"></i> ${model.location}</p>
+                                </div>
+                                <div class="mt-4 md:mt-0 bg-zinc-900 px-6 py-3 rounded-xl border border-zinc-800 text-center">
+                                    <span class="block text-xs text-zinc-500 uppercase tracking-widest mb-1">Cachê (Referência)</span>
+                                    <span class="text-xl text-white font-medium">${model.price}</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-10">
+                                <h3 class="text-xl font-serif text-white mb-4 border-b border-zinc-800 pb-2">Sobre Mim</h3>
+                                <p class="text-zinc-300 leading-relaxed font-light text-lg">${model.bio}</p>
+                            </div>
+
+                            <div class="mb-12">
+                                <h3 class="text-xl font-serif text-white mb-4 border-b border-zinc-800 pb-2">Serviços Oferecidos</h3>
+                                <div class="flex flex-wrap gap-3">${servicesHTML}</div>
+                            </div>
+
+                            <div class="mb-12">
+                                <h3 class="text-xl font-serif text-white mb-4 border-b border-zinc-800 pb-2 flex items-center"><i data-lucide="camera" class="w-5 h-5 mr-2 text-amber-500"></i> Galeria Exclusiva</h3>
+                                ${mediaHTML}
+                            </div>
+
+                            <div class="mb-12">
+                                <h3 class="text-xl font-serif text-white mb-4 border-b border-zinc-800 pb-2 flex items-center"><i data-lucide="message-square" class="w-5 h-5 mr-2 text-amber-500"></i> Avaliações de Clientes</h3>
+                                <div class="mb-8">${commentsHTML}</div>
+                                
+                                <!-- Simulação de Form de Comentário -->
+                                <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800" id="comment-form-box">
+                                    <h4 class="text-white font-medium mb-2">Deixe sua avaliação</h4>
+                                    <p class="text-xs text-zinc-500 mb-4 flex items-center"><i data-lucide="shield" class="w-3 h-3 mr-1 shrink-0"></i> Seu comentário será enviado para moderação.</p>
+                                    <div class="flex flex-col gap-3">
+                                        <textarea id="comment-text" placeholder="Como foi sua experiência?" rows="3" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-amber-500 resize-none"></textarea>
+                                        <button onclick="submitComment()" class="self-end bg-amber-600 hover:bg-amber-500 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors flex items-center">Enviar Avaliação <i data-lucide="send" class="w-4 h-4 ml-2"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 p-8 rounded-2xl border border-amber-900/30 shadow-2xl relative overflow-hidden">
+                                <h3 class="text-2xl font-serif text-white mb-2 relative z-10">Interessou?</h3>
+                                <p class="text-zinc-400 mb-8 relative z-10">Entre em contato diretamente. Seja sempre educado e respeitoso.</p>
+                                <div class="flex flex-col sm:flex-row gap-4 relative z-10">
+                                    <a href="https://wa.me/${model.phone}" target="_blank" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-4 px-6 rounded-xl flex items-center justify-center transition-colors">
+                                        <i data-lucide="phone" class="w-5 h-5 mr-3"></i> WhatsApp
+                                    </a>
+                                    <button class="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-4 px-6 rounded-xl flex items-center justify-center transition-colors border border-zinc-700">
+                                        <i data-lucide="instagram" class="w-5 h-5 mr-3 text-amber-500"></i> Ver Instagram
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            navigateTo('profile');
+            lucide.createIcons();
+        }
+
+        function submitComment() {
+            const txt = document.getElementById('comment-text').value;
+            if(txt.trim() === '') return;
+            const box = document.getElementById('comment-form-box');
+            box.innerHTML = `
+                <div class="bg-green-500/10 border border-green-500/30 text-green-400 p-4 rounded-xl text-sm text-center flex items-center justify-center">
+                    <i data-lucide="check" class="w-5 h-5 mr-2"></i> Avaliação enviada com sucesso! Aguardando moderação.
+                </div>
+            `;
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
