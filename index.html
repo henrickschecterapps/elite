@@ -49,6 +49,10 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* Utility classes for favorites heart fill */
+        .fill-red-500 { fill: #ef4444; }
+        .fill-transparent { fill: transparent; }
     </style>
 </head>
 <body class="min-h-screen font-sans">
@@ -66,14 +70,24 @@
                 </div>
 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
                     <button onclick="navigateTo('home')" id="nav-home" class="nav-btn text-sm tracking-wide text-amber-500 hover:text-amber-500 transition-colors">ACOMPANHANTES</button>
                     <button onclick="navigateTo('howItWorks')" id="nav-howItWorks" class="nav-btn text-sm tracking-wide text-zinc-400 hover:text-amber-500 transition-colors">COMO FUNCIONA</button>
-                    <button onclick="navigateTo('advertise')" id="nav-advertise" class="nav-btn px-5 py-2.5 rounded-full border border-amber-600/50 text-amber-500 text-sm font-medium hover:bg-amber-600 hover:text-white transition-all duration-300">SOU MODELO (ANUNCIE)</button>
+                    <button onclick="navigateTo('advertise')" id="nav-advertise" class="nav-btn px-5 py-2.5 rounded-full border border-amber-600/50 text-amber-500 text-sm font-medium hover:bg-amber-600 hover:text-white transition-all duration-300">SOU MODELO</button>
+                    
+                    <!-- Panic Button Desktop -->
+                    <button onclick="panicEscape()" title="Sair Rápido (Aperte Esc 2x)" class="nav-btn flex items-center px-4 py-2 rounded-lg bg-zinc-900/80 border border-zinc-800 text-xs tracking-wide text-zinc-400 hover:text-red-500 hover:border-red-500/50 transition-all">
+                        <i data-lucide="eye-off" class="w-4 h-4 mr-2"></i> SAIR RÁPIDO
+                    </button>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
+                <div class="md:hidden flex items-center space-x-4">
+                    <!-- Panic Button Mobile -->
+                    <button onclick="panicEscape()" class="text-zinc-500 hover:text-red-500 transition-colors p-2 bg-zinc-900 rounded-lg border border-zinc-800">
+                        <i data-lucide="eye-off" class="w-5 h-5"></i>
+                    </button>
+                    
                     <button onclick="toggleMobileMenu()" class="text-zinc-400 hover:text-white">
                         <i data-lucide="menu" id="mobile-menu-icon" class="w-7 h-7"></i>
                     </button>
@@ -401,6 +415,27 @@
 
     </main>
 
+    <!-- LIGHTBOX OVERLAY -->
+    <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/95 flex items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 p-2 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <button onclick="prevLightboxMedia()" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+            <i data-lucide="chevron-left" class="w-8 h-8"></i>
+        </button>
+        <button onclick="nextLightboxMedia()" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+            <i data-lucide="chevron-right" class="w-8 h-8"></i>
+        </button>
+        
+        <div id="lightbox-content" class="w-full max-w-5xl max-h-[90vh] flex justify-center items-center px-16">
+            <!-- Media content injected via JS -->
+        </div>
+        
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-zinc-500 text-sm tracking-widest font-mono">
+            <span id="lightbox-counter">1 / 1</span>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="bg-zinc-950 border-t border-zinc-900 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -488,6 +523,13 @@
             age: 'all',
             price: 'all'
         };
+
+        // Salvar favoritos no localStorage do navegador
+        let favorites = JSON.parse(localStorage.getItem('elite_favorites')) || [];
+        
+        // Estado do Lightbox
+        let currentLightboxMedia = [];
+        let currentLightboxIndex = 0;
 
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -617,6 +659,98 @@
             });
         }
 
+        // --- FUNCIONALIDADE: FAVORITOS ---
+        function toggleFavorite(event, id) {
+            event.stopPropagation(); // Evita que o clique abra o perfil
+            
+            const index = favorites.indexOf(id);
+            if (index > -1) {
+                favorites.splice(index, 1); // Remove dos favoritos
+            } else {
+                favorites.push(id); // Adiciona aos favoritos
+            }
+            
+            localStorage.setItem('elite_favorites', JSON.stringify(favorites));
+            renderGrid(); // Atualiza a tela para refletir os corações
+        }
+
+        // --- FUNCIONALIDADE: PANIC BUTTON (MODO DISCRETO) ---
+        function panicEscape() {
+            // Replace previne que o usuário volte ao site clicando em "Voltar" no navegador
+            window.location.replace("https://www.google.com/search?q=cota%C3%A7%C3%A3o+dolar");
+        }
+
+        // Atalho de teclado: Apertar ESC 2 vezes rápido
+        let escPressed = false;
+        let escTimeout;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Fecha o lightbox se estiver aberto
+                const lightbox = document.getElementById('lightbox');
+                if (!lightbox.classList.contains('hidden')) {
+                    closeLightbox();
+                    return;
+                }
+
+                if (escPressed) {
+                    panicEscape(); // Foi pressionado duas vezes
+                } else {
+                    escPressed = true;
+                    escTimeout = setTimeout(() => { escPressed = false; }, 500); // 500ms de tolerância
+                }
+            }
+        });
+
+        // --- FUNCIONALIDADE: LIGHTBOX (GALERIA) ---
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('hidden');
+            
+            // Pequeno delay para permitir a transição CSS
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+            }, 10);
+            
+            updateLightboxMedia();
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('opacity-0');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                document.getElementById('lightbox-content').innerHTML = ''; // Limpa o conteúdo (para pausar vídeos)
+            }, 300);
+        }
+
+        function nextLightboxMedia() {
+            if(currentLightboxMedia.length <= 1) return;
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxMedia.length;
+            updateLightboxMedia();
+        }
+
+        function prevLightboxMedia() {
+            if(currentLightboxMedia.length <= 1) return;
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxMedia.length) % currentLightboxMedia.length;
+            updateLightboxMedia();
+        }
+
+        function updateLightboxMedia() {
+            const content = document.getElementById('lightbox-content');
+            const media = currentLightboxMedia[currentLightboxIndex];
+            
+            if (media.type === 'video') {
+                content.innerHTML = `<video src="${media.src}" controls autoplay class="max-h-[85vh] max-w-full rounded-lg shadow-2xl ring-1 ring-zinc-800"></video>`;
+            } else {
+                content.innerHTML = `<img src="${media.src}" class="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl ring-1 ring-zinc-800">`;
+            }
+            
+            document.getElementById('lightbox-counter').innerText = `${currentLightboxIndex + 1} / ${currentLightboxMedia.length}`;
+            lucide.createIcons();
+        }
+
+
         // --- RENDERING ---
         function renderGrid() {
             const filtered = getFilteredModels();
@@ -638,18 +772,30 @@
                 emptyState.classList.remove('hidden');
             } else {
                 emptyState.classList.add('hidden');
-                grid.innerHTML = filtered.map(model => `
-                    <div onclick="openProfile(${model.id})" class="group cursor-pointer rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 transition-all duration-500 shadow-lg hover:shadow-amber-900/20">
+                grid.innerHTML = filtered.map(model => {
+                    const isFav = favorites.includes(model.id);
+                    const heartClass = isFav 
+                        ? "text-red-500 fill-red-500" 
+                        : "text-zinc-300 hover:text-red-500 hover:fill-red-500/50";
+
+                    return `
+                    <div onclick="openProfile(${model.id})" class="relative group cursor-pointer rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 transition-all duration-500 shadow-lg hover:shadow-amber-900/20">
+                        
+                        <!-- Botão de Favorito -->
+                        <button onclick="toggleFavorite(event, ${model.id})" class="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-zinc-950/40 backdrop-blur-md border border-zinc-800/50 hover:bg-zinc-900 transition-all shadow-lg">
+                            <i data-lucide="heart" class="w-5 h-5 ${heartClass} transition-colors"></i>
+                        </button>
+
                         <div class="relative aspect-[3/4] overflow-hidden bg-zinc-800">
                             <img src="${model.image}" alt="${model.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                             <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
                             
-                            <div class="absolute top-4 left-4 flex flex-col gap-2">
+                            <div class="absolute top-4 left-4 flex flex-col gap-2 z-10">
                                 ${model.isVip ? `<span class="bg-amber-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center shadow-lg"><i data-lucide="crown" class="w-3 h-3 mr-1"></i> VIP</span>` : ''}
                                 ${model.isNew ? `<span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center shadow-lg"><i data-lucide="star" class="w-3 h-3 mr-1"></i> Nova</span>` : ''}
                             </div>
 
-                            <div class="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            <div class="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-10">
                                 <div>
                                     <h3 class="text-2xl font-serif text-white mb-1 flex items-center">
                                         ${model.name}, ${model.age} <i data-lucide="shield" class="w-4 h-4 ml-2 text-blue-400" title="Verificado"></i>
@@ -661,7 +807,7 @@
                             </div>
                         </div>
                     </div>
-                `).join('');
+                `}).join('');
                 lucide.createIcons();
             }
         }
@@ -670,6 +816,11 @@
             const model = MODELS.find(m => m.id === id);
             const container = document.getElementById('view-profile');
             
+            // Preparar a array global da Lightbox
+            currentLightboxMedia = [];
+            model.videos.forEach(v => currentLightboxMedia.push({ type: 'video', src: v }));
+            model.gallery.forEach(img => currentLightboxMedia.push({ type: 'image', src: img }));
+
             let servicesHTML = model.services.map(s => `
                 <span class="px-4 py-2 rounded-full bg-zinc-900 border border-zinc-700/50 text-zinc-300 text-sm flex items-center">
                     <i data-lucide="star" class="w-3 h-3 text-amber-500 mr-2"></i> ${s}
@@ -680,17 +831,17 @@
                 mediaHTML = `<p class="text-zinc-500 font-light italic">Nenhuma mídia adicional cadastrada.</p>`;
             } else {
                 mediaHTML = `<div class="grid grid-cols-2 sm:grid-cols-3 gap-4">`;
-                model.videos.forEach(v => {
+                model.videos.forEach((v, i) => {
                     mediaHTML += `
-                    <div class="relative aspect-square rounded-xl overflow-hidden group border border-zinc-800">
-                        <img src="${v}" class="w-full h-full object-cover opacity-70">
-                        <div class="absolute inset-0 flex items-center justify-center"><i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i></div>
+                    <div onclick="openLightbox(${i})" class="relative aspect-square rounded-xl overflow-hidden group border border-zinc-800 cursor-pointer">
+                        <img src="${v}" class="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 flex items-center justify-center"><i data-lucide="play-circle" class="w-12 h-12 text-white/80 group-hover:text-amber-500 transition-colors"></i></div>
                     </div>`;
                 });
-                model.gallery.forEach(img => {
+                model.gallery.forEach((img, i) => {
                     mediaHTML += `
-                    <div class="relative aspect-square rounded-xl overflow-hidden border border-zinc-800">
-                        <img src="${img}" class="w-full h-full object-cover">
+                    <div onclick="openLightbox(${model.videos.length + i})" class="relative aspect-square rounded-xl overflow-hidden border border-zinc-800 group cursor-pointer">
+                        <img src="${img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>`;
                 });
                 mediaHTML += `</div>`;
