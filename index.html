@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Élite | Acompanhantes de Luxo</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -19,10 +19,10 @@
             }
         }
     </script>
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -49,11 +49,11 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         /* Utility classes for favorites heart fill */
         .fill-red-500 { fill: #ef4444; }
         .fill-transparent { fill: transparent; }
-        
+
         /* Custom animations for hero */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -83,7 +83,7 @@
                     <button onclick="navigateTo('home')" id="nav-home" class="nav-btn text-sm tracking-wide text-amber-500 hover:text-amber-500 transition-colors">ACOMPANHANTES</button>
                     <button onclick="navigateTo('howItWorks')" id="nav-howItWorks" class="nav-btn text-sm tracking-wide text-zinc-400 hover:text-amber-500 transition-colors">COMO FUNCIONA</button>
                     <button onclick="navigateTo('advertise')" id="nav-advertise" class="nav-btn px-5 py-2.5 rounded-full border border-amber-600/50 text-amber-500 text-sm font-medium hover:bg-amber-600 hover:text-white transition-all duration-300">SOU MODELO</button>
-                    
+
                     <!-- Panic Button Desktop -->
                     <button onclick="panicEscape()" title="Sair Rápido (Aperte Esc 2x)" class="nav-btn flex items-center px-4 py-2 rounded-lg bg-zinc-900/80 border border-zinc-800 text-xs tracking-wide text-zinc-400 hover:text-red-500 hover:border-red-500/50 transition-all">
                         <i data-lucide="eye-off" class="w-4 h-4 mr-2"></i> SAIR RÁPIDO
@@ -93,11 +93,11 @@
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center space-x-4">
                     <!-- Panic Button Mobile -->
-                    <button onclick="panicEscape()" class="text-zinc-500 hover:text-red-500 transition-colors p-2 bg-zinc-900 rounded-lg border border-zinc-800">
+                    <button aria-label="Sair Rápido" onclick="panicEscape()" class="text-zinc-500 hover:text-red-500 transition-colors p-2 bg-zinc-900 rounded-lg border border-zinc-800">
                         <i data-lucide="eye-off" class="w-5 h-5"></i>
                     </button>
-                    
-                    <button onclick="toggleMobileMenu()" class="text-zinc-400 hover:text-white">
+
+                    <button aria-label="Abrir Menu" onclick="toggleMobileMenu()" class="text-zinc-400 hover:text-white">
                         <i data-lucide="menu" id="mobile-menu-icon" class="w-7 h-7"></i>
                     </button>
                 </div>
@@ -116,7 +116,7 @@
 
     <!-- MAIN CONTENT -->
     <main class="pt-20 pb-24 min-h-screen">
-        
+
         <!-- HOME VIEW -->
         <div id="view-home" class="fade-in block">
             <!-- Hero Otimizado -->
@@ -127,7 +127,7 @@
                     <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-transparent to-zinc-950"></div>
                 </div>
                 <div class="relative z-10 text-center px-4 max-w-4xl w-full flex flex-col items-center">
-                    
+
                     <!-- Badge de Confiança (Marketing) -->
                     <div class="inline-flex items-center space-x-2 bg-zinc-900/60 backdrop-blur-md border border-zinc-700/50 rounded-full px-4 py-1.5 mb-6 md:mb-8 animate-fade-in-up">
                         <span class="flex h-2 w-2 relative">
@@ -140,17 +140,17 @@
                     <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-white mb-4 md:mb-6 leading-tight tracking-tight animate-fade-in-up" style="animation-delay: 0.1s; opacity: 0;">
                         Encontre a <span class="text-amber-500 italic relative inline-block">Companhia Perfeita<svg class="absolute w-full h-3 -bottom-1 left-0 text-amber-500/30 hidden sm:block" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="4" fill="transparent"/></svg></span>
                     </h1>
-                    
+
                     <p class="text-base sm:text-lg md:text-xl text-zinc-400 mb-8 md:mb-12 font-light max-w-2xl animate-fade-in-up" style="animation-delay: 0.2s; opacity: 0;">
                         O diretório mais exclusivo do Brasil. Profissionais de alto nível, selecionadas rigorosamente para momentos inesquecíveis.
                     </p>
-                    
+
                     <!-- Quick Search Bar -->
                     <div class="w-full max-w-2xl mx-auto bg-zinc-900/80 backdrop-blur-md p-2 rounded-2xl border border-zinc-700/50 shadow-2xl animate-fade-in-up transition-all hover:border-amber-500/30" style="animation-delay: 0.3s; opacity: 0;">
                         <div class="flex flex-col sm:flex-row items-center">
                             <div class="flex-1 flex items-center px-4 py-3 w-full border-b sm:border-b-0 sm:border-r border-zinc-700/50">
                                 <i data-lucide="map-pin" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i>
-                                <input type="text" id="searchInput" placeholder="Busque por cidade, bairro ou nome..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-zinc-500 outline-none text-base sm:text-lg">
+                                <input aria-label="Buscar por cidade, bairro ou nome" type="text" id="searchInput" placeholder="Busque por cidade, bairro ou nome..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-zinc-500 outline-none text-base sm:text-lg">
                             </div>
                             <button onclick="document.getElementById('category-tabs').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-2 bg-amber-600 hover:bg-amber-500 text-white px-8 py-3 rounded-xl font-medium transition-colors flex items-center justify-center shrink-0">
                                 <i data-lucide="search" class="w-4 h-4 mr-2"></i> Buscar
@@ -243,12 +243,12 @@
                         Eleve seu padrão. <span class="text-amber-500 italic">Anuncie na Élite.</span>
                     </h1>
                     <p class="text-xl text-zinc-400 font-light leading-relaxed">
-                        Conectamos profissionais independentes de alto padrão aos clientes mais exigentes do mercado. 
+                        Conectamos profissionais independentes de alto padrão aos clientes mais exigentes do mercado.
                         Mais visibilidade, mais segurança e clientes qualificados para você.
                     </p>
                 </div>
             </div>
-            
+
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                     <div class="flex flex-col items-center">
@@ -274,14 +274,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="bg-zinc-950 py-20">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
                         <h2 class="text-3xl font-serif text-white mb-4">Escolha o plano ideal para você</h2>
                         <p class="text-zinc-400">Assinaturas mensais sem fidelidade. Cancele quando quiser.</p>
                     </div>
-                    
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                         <!-- Plan Free -->
                         <div class="relative rounded-2xl p-8 bg-zinc-950 border border-zinc-800 flex flex-col opacity-90 hover:opacity-100 transition-opacity">
@@ -350,7 +350,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="max-w-4xl mx-auto px-4 py-20 text-center">
                 <h2 class="text-3xl font-serif text-white mb-6">Pronta para começar?</h2>
                 <p class="text-zinc-400 mb-10 text-lg">O processo de aprovação leva em média 24 horas. Exigimos verificação de identidade para garantir a segurança da plataforma e das anunciantes.</p>
@@ -373,7 +373,7 @@
 
             <div class="max-w-3xl mx-auto px-4 py-12">
                 <form id="registrationForm" onsubmit="submitRegistration(event)" class="space-y-10">
-                    
+
                     <!-- DADOS PESSOAIS -->
                     <div class="bg-zinc-900/50 p-6 sm:p-8 rounded-2xl border border-zinc-800">
                         <h2 class="text-xl font-serif text-amber-500 mb-6 flex items-center border-b border-zinc-800 pb-3">
@@ -478,7 +478,7 @@
                             <i data-lucide="camera" class="w-5 h-5 mr-2"></i> Mídia & Segurança
                         </h2>
                         <div class="grid grid-cols-1 gap-6">
-                            
+
                             <!-- Foto de Perfil -->
                             <div>
                                 <label class="block text-sm font-medium text-white mb-1">Fotos para o Perfil (Até 5 fotos)</label>
@@ -534,12 +534,12 @@
                         Como funciona a <span class="text-amber-500 italic">Élite</span>?
                     </h1>
                     <p class="text-xl text-zinc-400 font-light leading-relaxed">
-                        Somos um diretório classificado focado na transparência e conexão direta. 
+                        Somos um diretório classificado focado na transparência e conexão direta.
                         Descubra o passo a passo de como encontrar a companhia ideal sem intermediários.
                     </p>
                 </div>
             </div>
-            
+
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <div class="space-y-16">
                     <!-- STEP 1 -->
@@ -589,7 +589,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="bg-amber-900/10 border-t border-b border-amber-900/30 py-16">
                 <div class="max-w-4xl mx-auto px-4">
                     <div class="flex items-start space-x-4">
@@ -611,20 +611,20 @@
 
     <!-- LIGHTBOX OVERLAY -->
     <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/95 flex items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 p-2 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+        <button aria-label="Fechar galeria" onclick="closeLightbox()" class="absolute top-6 right-6 p-2 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-        <button onclick="prevLightboxMedia()" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+        <button aria-label="Mídia anterior" onclick="prevLightboxMedia()" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
             <i data-lucide="chevron-left" class="w-8 h-8"></i>
         </button>
-        <button onclick="nextLightboxMedia()" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+        <button aria-label="Próxima mídia" onclick="nextLightboxMedia()" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
             <i data-lucide="chevron-right" class="w-8 h-8"></i>
         </button>
-        
+
         <div id="lightbox-content" class="w-full max-w-5xl max-h-[90vh] flex justify-center items-center px-16">
             <!-- Media content injected via JS -->
         </div>
-        
+
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-zinc-500 text-sm tracking-widest font-mono">
             <span id="lightbox-counter">1 / 1</span>
         </div>
@@ -801,7 +801,7 @@
 
         // Salvar favoritos no localStorage do navegador
         let favorites = JSON.parse(localStorage.getItem('elite_favorites')) || [];
-        
+
         // Estado do Lightbox
         let currentLightboxMedia = [];
         let currentLightboxIndex = 0;
@@ -811,7 +811,7 @@
             lucide.createIcons();
             populateLocations();
             renderGrid();
-            
+
             // Search Input Event
             document.getElementById('searchInput').addEventListener('input', (e) => {
                 state.search = e.target.value.toLowerCase();
@@ -841,19 +841,19 @@
             });
             // Show target
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
-            
+
             // Update Nav styling
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.replace('text-amber-500', 'text-zinc-400'));
             if(document.getElementById(`nav-${viewId}`)) {
                 document.getElementById(`nav-${viewId}`).classList.replace('text-zinc-400', 'text-amber-500');
             }
-            
+
             // Pre-select plan if passed
             if (viewId === 'register' && plan) {
                 const planSelect = document.getElementById('planSelection');
                 if (planSelect) planSelect.value = plan;
             }
-            
+
             // Close mobile menu
             document.getElementById('mobile-menu').classList.add('hidden');
             window.scrollTo(0, 0);
@@ -909,7 +909,7 @@
         function updateCityDropdown() {
             const citySelect = document.getElementById('cityFilter');
             citySelect.innerHTML = '<option value="all">Todas as Cidades</option>';
-            
+
             if (state.state === 'all') {
                 citySelect.disabled = true;
             } else {
@@ -930,7 +930,7 @@
                 if (state.category === 'novas' && !m.isNew) return false;
                 if (state.category === 'viagens' && !m.services.some(s => s.toLowerCase().includes('viage'))) return false;
                 if (state.price !== 'all' && m.priceValue > parseInt(state.price)) return false;
-                
+
                 if (state.age !== 'all') {
                     if (state.age === '18-23' && (m.age < 18 || m.age > 23)) return false;
                     if (state.age === '24-29' && (m.age < 24 || m.age > 29)) return false;
@@ -943,14 +943,14 @@
         // --- FUNCIONALIDADE: FAVORITOS ---
         function toggleFavorite(event, id) {
             event.stopPropagation(); // Evita que o clique abra o perfil
-            
+
             const index = favorites.indexOf(id);
             if (index > -1) {
                 favorites.splice(index, 1); // Remove dos favoritos
             } else {
                 favorites.push(id); // Adiciona aos favoritos
             }
-            
+
             localStorage.setItem('elite_favorites', JSON.stringify(favorites));
             renderGrid(); // Atualiza a tela para refletir os corações
         }
@@ -987,12 +987,12 @@
             currentLightboxIndex = index;
             const lightbox = document.getElementById('lightbox');
             lightbox.classList.remove('hidden');
-            
+
             // Pequeno delay para permitir a transição CSS
             setTimeout(() => {
                 lightbox.classList.remove('opacity-0');
             }, 10);
-            
+
             updateLightboxMedia();
         }
 
@@ -1020,20 +1020,20 @@
         function updateLightboxMedia() {
             const content = document.getElementById('lightbox-content');
             const media = currentLightboxMedia[currentLightboxIndex];
-            
+
             if (media.type === 'video') {
                 content.innerHTML = `<video src="${media.src}" controls autoplay class="max-h-[85vh] max-w-full rounded-lg shadow-2xl ring-1 ring-zinc-800"></video>`;
             } else {
                 content.innerHTML = `<img src="${media.src}" class="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl ring-1 ring-zinc-800">`;
             }
-            
+
             document.getElementById('lightbox-counter').innerText = `${currentLightboxIndex + 1} / ${currentLightboxMedia.length}`;
             lucide.createIcons();
         }
 
 
         // --- RENDERING ---
-        
+
         // Verifica se a tela inicial está sem nenhum filtro aplicado
         function isDefaultState() {
             return state.category === 'todas' && state.search === '' && state.state === 'all' && state.city === 'all' && state.gender === 'all' && state.age === 'all' && state.price === 'all';
@@ -1042,21 +1042,21 @@
         // Função auxiliar para gerar o HTML do card de uma modelo PREMIUM
         function generateModelCard(model) {
             const isFav = favorites.includes(model.id);
-            const heartClass = isFav 
-                ? "text-red-500 fill-red-500" 
+            const heartClass = isFav
+                ? "text-red-500 fill-red-500"
                 : "text-zinc-300 hover:text-red-500 hover:fill-red-500/50";
 
             return `
             <div onclick="openProfile(${model.id})" class="relative group cursor-pointer rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 transition-all duration-500 shadow-lg hover:shadow-amber-900/20">
-                
-                <button onclick="toggleFavorite(event, ${model.id})" class="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-zinc-950/40 backdrop-blur-md border border-zinc-800/50 hover:bg-zinc-900 transition-all shadow-lg">
+
+                <button aria-label="Adicionar aos favoritos" onclick="toggleFavorite(event, ${model.id})" class="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-zinc-950/40 backdrop-blur-md border border-zinc-800/50 hover:bg-zinc-900 transition-all shadow-lg">
                     <i data-lucide="heart" class="w-5 h-5 ${heartClass} transition-colors"></i>
                 </button>
 
                 <div class="relative aspect-[3/4] overflow-hidden bg-zinc-800">
                     <img src="${model.image}" alt="${model.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
-                    
+
                     <div class="absolute top-4 left-4 flex flex-col gap-2 z-10">
                         ${model.isVip ? `<span class="bg-amber-500 text-zinc-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center shadow-lg"><i data-lucide="crown" class="w-3 h-3 mr-1"></i> VIP</span>` : ''}
                         ${model.isNew ? `<span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center shadow-lg"><i data-lucide="star" class="w-3 h-3 mr-1"></i> Nova</span>` : ''}
@@ -1083,7 +1083,7 @@
                 <div class="relative aspect-[3/4] overflow-hidden bg-zinc-800">
                     <img src="${model.image}" alt="${model.name}" class="w-full h-full object-cover transition-transform duration-500 opacity-80 group-hover:opacity-100 group-hover:scale-105" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-90"></div>
-                    
+
                     <div class="absolute bottom-0 left-0 w-full p-3 z-10">
                         <h3 class="text-sm font-serif text-white mb-0.5 truncate">${model.name}, ${model.age}</h3>
                         <p class="text-zinc-400 text-[10px] flex items-center font-light truncate">
@@ -1135,7 +1135,7 @@
         function renderGrid() {
             const filtered = getFilteredModels();
             const mainArea = document.getElementById('main-content-area');
-            
+
             if (filtered.length === 0) {
                 mainArea.innerHTML = `
                     <div id="empty-state" class="text-center py-20 bg-zinc-900/50 rounded-2xl border border-dashed border-zinc-800">
@@ -1145,7 +1145,7 @@
                         <button onclick="resetFilters()" class="px-6 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg transition-colors">Ver Todas as Modelos</button>
                     </div>
                 `;
-            } 
+            }
             // SE ESTIVER NO ESTADO PADRÃO (Sem filtros aplicados) -> Renderizar Várias Vitrines
             else if (isDefaultState()) {
                 const topVips = filtered.filter(m => m.isVip && m.plan !== 'free').slice(0, 3);
@@ -1161,7 +1161,7 @@
                     ${renderSection('<i data-lucide="sparkles" class="w-6 h-6 mr-2 text-amber-500"></i> Destaques da Semana', 'Modelos recomendadas pela nossa curadoria.', geral)}
                     ${renderCompactSection('<i data-lucide="users" class="w-5 h-5 mr-2 text-zinc-500"></i> Conheça Mais Modelos', 'Novos perfis (Plano Start) ingressando na plataforma.', gratuitas)}
                 `;
-            } 
+            }
             // SE ALGUM FILTRO ESTIVER APLICADO -> Renderizar o Grid Convencional (Separando pagas das grátis)
             else {
                 let title = 'Resultados da Busca';
@@ -1202,14 +1202,14 @@
 
                 mainArea.innerHTML = html;
             }
-            
+
             lucide.createIcons();
         }
 
         function openProfile(id) {
             const model = MODELS.find(m => m.id === id);
             const container = document.getElementById('view-profile');
-            
+
             // Preparar a array global da Lightbox
             currentLightboxMedia = [];
             model.videos.forEach(v => currentLightboxMedia.push({ type: 'video', src: v }));
@@ -1219,7 +1219,7 @@
                 <span class="px-4 py-2 rounded-full bg-zinc-900 border border-zinc-700/50 text-zinc-300 text-sm flex items-center">
                     <i data-lucide="star" class="w-3 h-3 text-amber-500 mr-2"></i> ${s}
                 </span>`).join('');
-            
+
             let mediaHTML = '';
             if (model.plan === 'free') {
                 mediaHTML = `
@@ -1275,7 +1275,7 @@
                 <!-- CONTENT -->
                 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-10 pb-20">
                     <div class="flex flex-col md:flex-row gap-8">
-                        
+
                         <!-- Left col -->
                         <div class="w-full md:w-1/3 flex flex-col gap-6">
                             <div class="rounded-2xl overflow-hidden border-2 border-zinc-800 shadow-2xl shadow-black">
@@ -1330,7 +1330,7 @@
                             <div class="mb-12">
                                 <h3 class="text-xl font-serif text-white mb-4 border-b border-zinc-800 pb-2 flex items-center"><i data-lucide="message-square" class="w-5 h-5 mr-2 text-amber-500"></i> Avaliações de Clientes</h3>
                                 <div class="mb-8">${commentsHTML}</div>
-                                
+
                                 <!-- Simulação de Form de Comentário -->
                                 <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800" id="comment-form-box">
                                     <h4 class="text-white font-medium mb-2">Deixe sua avaliação</h4>
@@ -1388,7 +1388,7 @@
                 </div>
             `;
             lucide.createIcons();
-            
+
             // Simula um reset do form apos envio e leitura
             setTimeout(() => {
                 document.getElementById('registrationForm').reset();

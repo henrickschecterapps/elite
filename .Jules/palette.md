@@ -1,0 +1,3 @@
+## 2026-04-16 - Adicionar ARIA Labels em botões icon-only
+**Learning:** Elementos interativos como botões e inputs de busca que dependem inteiramente de ícones para comunicar seu propósito não são acessíveis para leitores de tela e tecnologias assistivas sem a utilização da tag `aria-label`. Pude perceber a ausência desta boa prática neste projeto em elementos cruciais como navegação lightbox, botões mobile e campos de busca.
+**Action:** Sempre verificar a presença e adicionar as propriedades `aria-label` adequadas em botões ou inputs que contêm apenas ícones, providenciando descrições concisas de seu propósito em português.
