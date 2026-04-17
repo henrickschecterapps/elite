@@ -93,11 +93,11 @@
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center space-x-4">
                     <!-- Panic Button Mobile -->
-                    <button onclick="panicEscape()" class="text-zinc-500 hover:text-red-500 transition-colors p-2 bg-zinc-900 rounded-lg border border-zinc-800">
+                    <button onclick="panicEscape()" aria-label="Sair rápido" class="text-zinc-500 hover:text-red-500 transition-colors p-2 bg-zinc-900 rounded-lg border border-zinc-800">
                         <i data-lucide="eye-off" class="w-5 h-5"></i>
                     </button>
                     
-                    <button onclick="toggleMobileMenu()" class="text-zinc-400 hover:text-white">
+                    <button onclick="toggleMobileMenu()" aria-label="Menu principal" class="text-zinc-400 hover:text-white">
                         <i data-lucide="menu" id="mobile-menu-icon" class="w-7 h-7"></i>
                     </button>
                 </div>
@@ -611,13 +611,13 @@
 
     <!-- LIGHTBOX OVERLAY -->
     <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/95 flex items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 p-2 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+        <button onclick="closeLightbox()" aria-label="Fechar galeria" class="absolute top-6 right-6 p-2 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-        <button onclick="prevLightboxMedia()" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+        <button onclick="prevLightboxMedia()" aria-label="Imagem anterior" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
             <i data-lucide="chevron-left" class="w-8 h-8"></i>
         </button>
-        <button onclick="nextLightboxMedia()" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+        <button onclick="nextLightboxMedia()" aria-label="Próxima imagem" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
             <i data-lucide="chevron-right" class="w-8 h-8"></i>
         </button>
         
@@ -1049,7 +1049,7 @@
             return `
             <div onclick="openProfile(${model.id})" class="relative group cursor-pointer rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 transition-all duration-500 shadow-lg hover:shadow-amber-900/20">
                 
-                <button onclick="toggleFavorite(event, ${model.id})" class="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-zinc-950/40 backdrop-blur-md border border-zinc-800/50 hover:bg-zinc-900 transition-all shadow-lg">
+                <button onclick="toggleFavorite(event, ${model.id})" aria-label="${isFav ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}" class="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-zinc-950/40 backdrop-blur-md border border-zinc-800/50 hover:bg-zinc-900 transition-all shadow-lg">
                     <i data-lucide="heart" class="w-5 h-5 ${heartClass} transition-colors"></i>
                 </button>
 
