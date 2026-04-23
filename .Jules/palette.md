@@ -9,3 +9,7 @@
 ## 2026-04-18 - Visual Loading Feedback on Form Submissions
 **Learning:** During form submission, users often click the submit button multiple times if they don't see immediate feedback. This app had no visual loading state during the simulated network request, which can cause confusion and accidental double-submissions.
 **Action:** Always disable the submit button and show an immediate visual loading state (like a spinner and updated text) to provide clear system status and prevent duplicate actions.
+
+## 2026-04-18 - Keyboard Accessibility & Feedback for Custom File Inputs
+**Learning:** Customizing file inputs by wrapping them in styled labels and applying `class="hidden"` completely removes the input from the tab order, breaking keyboard navigation. Additionally, removing the native input removes the browser's default feedback indicating how many files were selected, leaving users unsure if their upload succeeded.
+**Action:** Use `.sr-only` to visually hide the input while preserving focusability. Always apply `focus-within` styles to the parent container (e.g. `<label>`) to provide visual focus feedback when the hidden input is focused. Also, use JavaScript (via `onchange`) to provide explicit textual feedback about the selected files.
