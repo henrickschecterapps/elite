@@ -6,7 +6,7 @@
     <title>Élite | Acompanhantes de Luxo</title>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com/3.4.17" integrity="sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@1.9.0/dist/umd/lucide.min.js" integrity="sha384-IqFPLYkOqLtTPxjqxexZqUbfJ96VL7j4aK+iTk6ZPxlQPnJHKAH0XV1dm77sFrvv" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         body {
@@ -71,12 +71,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <button aria-label="Página inicial" class="flex items-center cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-lg p-1" onclick="navigateTo('home')">
+                <div class="flex items-center cursor-pointer group" onclick="navigateTo('home')">
                     <i data-lucide="diamond" class="w-8 h-8 text-amber-500 group-hover:text-amber-400 transition-colors"></i>
                     <span class="ml-2 text-2xl font-serif tracking-widest text-white uppercase">
                         Élite<span class="text-amber-500">.</span>
                     </span>
-                </button>
+                </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
@@ -93,11 +93,11 @@
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center space-x-4">
                     <!-- Panic Button Mobile -->
-                    <button onclick="panicEscape()" aria-label="Sair rápido" class="text-zinc-500 hover:text-red-500 transition-colors p-2 bg-zinc-900 rounded-lg border border-zinc-800">
+                    <button aria-label="Sair Rápido" onclick="panicEscape()" class="text-zinc-500 hover:text-red-500 transition-colors p-2 bg-zinc-900 rounded-lg border border-zinc-800">
                         <i data-lucide="eye-off" class="w-5 h-5"></i>
                     </button>
 
-                    <button onclick="toggleMobileMenu()" aria-label="Menu principal" class="text-zinc-400 hover:text-white">
+                    <button aria-label="Abrir Menu" onclick="toggleMobileMenu()" class="text-zinc-400 hover:text-white">
                         <i data-lucide="menu" id="mobile-menu-icon" class="w-7 h-7"></i>
                     </button>
                 </div>
@@ -146,11 +146,11 @@
                     </p>
 
                     <!-- Quick Search Bar -->
-                    <div class="w-full max-w-2xl mx-auto bg-zinc-900/80 backdrop-blur-md p-2 rounded-2xl border border-zinc-700/50 shadow-2xl animate-fade-in-up transition-all hover:border-amber-500/30 focus-within:border-amber-500/80 focus-within:ring-1 focus-within:ring-amber-500/50" style="animation-delay: 0.3s; opacity: 0;">
+                    <div class="w-full max-w-2xl mx-auto bg-zinc-900/80 backdrop-blur-md p-2 rounded-2xl border border-zinc-700/50 shadow-2xl animate-fade-in-up transition-all hover:border-amber-500/30" style="animation-delay: 0.3s; opacity: 0;">
                         <div class="flex flex-col sm:flex-row items-center">
                             <div class="flex-1 flex items-center px-4 py-3 w-full border-b sm:border-b-0 sm:border-r border-zinc-700/50">
                                 <i data-lucide="map-pin" class="w-5 h-5 text-amber-500 mr-3 shrink-0"></i>
-                                <input type="text" id="searchInput" aria-label="Buscar acompanhantes por cidade, bairro ou nome" placeholder="Busque por cidade, bairro ou nome..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-zinc-500 outline-none text-base sm:text-lg">
+                                <input aria-label="Buscar por cidade, bairro ou nome" type="text" id="searchInput" placeholder="Busque por cidade, bairro ou nome..." class="w-full bg-transparent border-none focus:ring-0 text-white placeholder-zinc-500 outline-none text-base sm:text-lg">
                             </div>
                             <button onclick="document.getElementById('category-tabs').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto mt-2 sm:mt-0 sm:ml-2 bg-amber-600 hover:bg-amber-500 text-white px-8 py-3 rounded-xl font-medium transition-colors flex items-center justify-center shrink-0">
                                 <i data-lucide="search" class="w-4 h-4 mr-2"></i> Buscar
@@ -484,23 +484,12 @@
                                 <label class="block text-sm font-medium text-white mb-1">Fotos para o Perfil (Até 5 fotos)</label>
                                 <p class="text-xs text-zinc-500 mb-3">Envie fotos com boa iluminação, sem excesso de filtros.</p>
                                 <div class="flex items-center justify-center w-full">
-                                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-zinc-700 border-dashed rounded-xl cursor-pointer bg-zinc-950/50 hover:bg-zinc-900 transition-colors focus-within:ring-2 focus-within:ring-amber-500 focus-within:border-amber-500">
+                                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-zinc-700 border-dashed rounded-xl cursor-pointer bg-zinc-950/50 hover:bg-zinc-900 transition-colors">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <i data-lucide="upload-cloud" id="upload-icon" class="w-8 h-8 text-zinc-500 mb-2"></i>
-                                            <p id="upload-text" class="text-sm text-zinc-400"><span class="font-semibold text-amber-500">Clique para selecionar</span> ou arraste</p>
+                                            <i data-lucide="upload-cloud" class="w-8 h-8 text-zinc-500 mb-2"></i>
+                                            <p class="text-sm text-zinc-400"><span class="font-semibold text-amber-500">Clique para selecionar</span> ou arraste</p>
                                         </div>
-                                        <input type="file" id="profile-upload" class="sr-only" multiple accept="image/*" onchange="
-                                            const fileCount = this.files.length;
-                                            const textEl = document.getElementById('upload-text');
-                                            const iconEl = document.getElementById('upload-icon');
-                                            if (fileCount > 0) {
-                                                textEl.innerHTML = '<span class=\'font-semibold text-amber-500\'>' + fileCount + ' arquivo(s) selecionado(s)</span>';
-                                                iconEl.classList.replace('text-zinc-500', 'text-amber-500');
-                                            } else {
-                                                textEl.innerHTML = '<span class=\'font-semibold text-amber-500\'>Clique para selecionar</span> ou arraste';
-                                                iconEl.classList.replace('text-amber-500', 'text-zinc-500');
-                                            }
-                                        "/>
+                                        <input type="file" class="hidden" multiple accept="image/*" />
                                     </label>
                                 </div>
                             </div>
@@ -530,7 +519,7 @@
                     <!-- BOTAO ENVIAR -->
                     <div id="registerStatus" class="hidden rounded-xl p-4 text-center"></div>
 
-                    <button id="registerSubmitBtn" type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-medium py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-amber-500/20 text-lg flex justify-center items-center disabled:opacity-75 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900">
+                    <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-medium py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-amber-500/20 text-lg flex justify-center items-center">
                         <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> Enviar Solicitação de Cadastro
                     </button>
                 </form>
@@ -622,13 +611,13 @@
 
     <!-- LIGHTBOX OVERLAY -->
     <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/95 flex items-center justify-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
-        <button onclick="closeLightbox()" aria-label="Fechar galeria" class="absolute top-6 right-6 p-2 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+        <button aria-label="Fechar galeria" onclick="closeLightbox()" class="absolute top-6 right-6 p-2 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-        <button onclick="prevLightboxMedia()" aria-label="Imagem anterior" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+        <button aria-label="Mídia anterior" onclick="prevLightboxMedia()" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
             <i data-lucide="chevron-left" class="w-8 h-8"></i>
         </button>
-        <button onclick="nextLightboxMedia()" aria-label="Próxima imagem" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
+        <button aria-label="Próxima mídia" onclick="nextLightboxMedia()" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 text-zinc-400 hover:text-white bg-zinc-900/50 hover:bg-zinc-800 rounded-full transition-colors z-50">
             <i data-lucide="chevron-right" class="w-8 h-8"></i>
         </button>
 
@@ -913,7 +902,7 @@
         function populateLocations() {
             const states = [...new Set(MODELS.map(m => m.state))].sort();
             const stateSelect = document.getElementById('stateFilter');
-            stateSelect.innerHTML += states.map(s => `<option value="${s}">${s}</option>`).join("");
+            states.forEach(s => stateSelect.innerHTML += `<option value="${s}">${s}</option>`);
             updateCityDropdown();
         }
 
@@ -926,7 +915,7 @@
             } else {
                 citySelect.disabled = false;
                 const cities = [...new Set(MODELS.filter(m => m.state === state.state).map(m => m.city))].sort();
-                citySelect.innerHTML += cities.map(c => `<option value="${c}">${c}</option>`).join("");
+                cities.forEach(c => citySelect.innerHTML += `<option value="${c}">${c}</option>`);
             }
             citySelect.value = state.city;
         }
@@ -1051,24 +1040,7 @@
         }
 
         // Função auxiliar para gerar o HTML do card de uma modelo PREMIUM
-        function generateModelCard(model, isCompact = false) {
-            if (isCompact) {
-                return `
-                <div onclick="openProfile(${model.id})" class="relative group cursor-pointer rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800/50 hover:border-zinc-600 transition-all duration-300 opacity-90 hover:opacity-100">
-                    <div class="relative aspect-[3/4] overflow-hidden bg-zinc-800">
-                        <img src="${model.image}" alt="${model.name}" class="w-full h-full object-cover transition-transform duration-500 opacity-80 group-hover:opacity-100 group-hover:scale-105" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-90"></div>
-
-                        <div class="absolute bottom-0 left-0 w-full p-3 z-10">
-                            <h3 class="text-sm font-serif text-white mb-0.5 truncate">${model.name}, ${model.age}</h3>
-                            <p class="text-zinc-400 text-[10px] flex items-center font-light truncate">
-                                <i data-lucide="map-pin" class="w-3 h-3 mr-1 text-zinc-500"></i> ${model.city}
-                            </p>
-                        </div>
-                    </div>
-                </div>`;
-            }
-
+        function generateModelCard(model) {
             const isFav = favorites.includes(model.id);
             const heartClass = isFav
                 ? "text-red-500 fill-red-500"
@@ -1077,7 +1049,7 @@
             return `
             <div onclick="openProfile(${model.id})" class="relative group cursor-pointer rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 transition-all duration-500 shadow-lg hover:shadow-amber-900/20">
 
-                <button onclick="toggleFavorite(event, ${model.id})" aria-label="${isFav ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}" class="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-zinc-950/40 backdrop-blur-md border border-zinc-800/50 hover:bg-zinc-900 transition-all shadow-lg">
+                <button aria-label="Adicionar aos favoritos" onclick="toggleFavorite(event, ${model.id})" class="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-zinc-950/40 backdrop-blur-md border border-zinc-800/50 hover:bg-zinc-900 transition-all shadow-lg">
                     <i data-lucide="heart" class="w-5 h-5 ${heartClass} transition-colors"></i>
                 </button>
 
@@ -1104,25 +1076,27 @@
             </div>`;
         }
 
-        // Função auxiliar para renderizar as vitrines/seções
-        function renderSection(title, subtitle, modelsArray, isCompact = false) {
-            if (modelsArray.length === 0) return '';
+        // Função auxiliar para gerar o HTML do card de uma modelo START (GRÁTIS) - Menor e mais simples
+        function generateCompactModelCard(model) {
+            return `
+            <div onclick="openProfile(${model.id})" class="relative group cursor-pointer rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800/50 hover:border-zinc-600 transition-all duration-300 opacity-90 hover:opacity-100">
+                <div class="relative aspect-[3/4] overflow-hidden bg-zinc-800">
+                    <img src="${model.image}" alt="${model.name}" class="w-full h-full object-cover transition-transform duration-500 opacity-80 group-hover:opacity-100 group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-90"></div>
 
-            if (isCompact) {
-                return `
-                <div class="mb-8 pt-12 border-t border-zinc-900/80">
-                    <div class="mb-6">
-                        <h2 class="text-xl sm:text-2xl font-serif text-zinc-300 flex items-center">${title}</h2>
-                        <p class="text-zinc-500 mt-1 text-sm">${subtitle}</p>
-                    </div>
-                    <!-- Grade menor: 2 colunas no mobile, 4 no tablet, 6 no PC -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        ${modelsArray.map(m => generateModelCard(m, true)).join('')}
+                    <div class="absolute bottom-0 left-0 w-full p-3 z-10">
+                        <h3 class="text-sm font-serif text-white mb-0.5 truncate">${model.name}, ${model.age}</h3>
+                        <p class="text-zinc-400 text-[10px] flex items-center font-light truncate">
+                            <i data-lucide="map-pin" class="w-3 h-3 mr-1 text-zinc-500"></i> ${model.city}
+                        </p>
                     </div>
                 </div>
-                `;
-            }
+            </div>`;
+        }
 
+        // Função auxiliar para renderizar as vitrines/seções Premium
+        function renderSection(title, subtitle, modelsArray) {
+            if (modelsArray.length === 0) return '';
             return `
                 <div class="mb-16">
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8">
@@ -1135,7 +1109,24 @@
                         </button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        ${modelsArray.map(m => generateModelCard(m, false)).join('')}
+                        ${modelsArray.map(generateModelCard).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função auxiliar para renderizar a vitrine Start (Grátis)
+        function renderCompactSection(title, subtitle, modelsArray) {
+            if (modelsArray.length === 0) return '';
+            return `
+                <div class="mb-8 pt-12 border-t border-zinc-900/80">
+                    <div class="mb-6">
+                        <h2 class="text-xl sm:text-2xl font-serif text-zinc-300 flex items-center">${title}</h2>
+                        <p class="text-zinc-500 mt-1 text-sm">${subtitle}</p>
+                    </div>
+                    <!-- Grade menor: 2 colunas no mobile, 4 no tablet, 6 no PC -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        ${modelsArray.map(generateCompactModelCard).join('')}
                     </div>
                 </div>
             `;
@@ -1168,7 +1159,7 @@
                     ${renderSection('<i data-lucide="star" class="w-6 h-6 mr-2 text-amber-500"></i> Novas Descobertas', 'Rostos recém-chegados à nossa plataforma.', novas)}
                     ${renderSection('<i data-lucide="plane" class="w-6 h-6 mr-2 text-amber-500"></i> Companhias para Viagens', 'Perfeitas para acompanhar você em destinos inesquecíveis.', viagens)}
                     ${renderSection('<i data-lucide="sparkles" class="w-6 h-6 mr-2 text-amber-500"></i> Destaques da Semana', 'Modelos recomendadas pela nossa curadoria.', geral)}
-                    ${renderSection('<i data-lucide="users" class="w-5 h-5 mr-2 text-zinc-500"></i> Conheça Mais Modelos', 'Novos perfis (Plano Start) ingressando na plataforma.', gratuitas, true)}
+                    ${renderCompactSection('<i data-lucide="users" class="w-5 h-5 mr-2 text-zinc-500"></i> Conheça Mais Modelos', 'Novos perfis (Plano Start) ingressando na plataforma.', gratuitas)}
                 `;
             }
             // SE ALGUM FILTRO ESTIVER APLICADO -> Renderizar o Grid Convencional (Separando pagas das grátis)
@@ -1193,7 +1184,7 @@
                 if (paidFiltered.length > 0) {
                     html += `
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                            ${paidFiltered.map(m => generateModelCard(m, false)).join('')}
+                            ${paidFiltered.map(generateModelCard).join('')}
                         </div>
                     `;
                 }
@@ -1203,7 +1194,7 @@
                         <div class="mt-8 pt-8 border-t border-zinc-900">
                             <h3 class="text-lg font-serif text-zinc-400 mb-4 flex items-center"><i data-lucide="users" class="w-4 h-4 mr-2"></i> Outros Resultados (Perfis Start)</h3>
                             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                                ${freeFiltered.map(m => generateModelCard(m, true)).join('')}
+                                ${freeFiltered.map(generateCompactModelCard).join('')}
                             </div>
                         </div>
                     `;
@@ -1355,7 +1346,7 @@
                                 <h3 class="text-2xl font-serif text-white mb-2 relative z-10">Interessou?</h3>
                                 <p class="text-zinc-400 mb-8 relative z-10">Entre em contato diretamente. Seja sempre educado e respeitoso.</p>
                                 <div class="flex flex-col sm:flex-row gap-4 relative z-10">
-                                    <a href="https://wa.me/${model.phone}" target="_blank" rel="noopener noreferrer" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-4 px-6 rounded-xl flex items-center justify-center transition-colors">
+                                    <a href="https://wa.me/${model.phone}" target="_blank" class="flex-1 bg-green-600 hover:bg-green-500 text-white font-medium py-4 px-6 rounded-xl flex items-center justify-center transition-colors">
                                         <i data-lucide="phone" class="w-5 h-5 mr-3"></i> WhatsApp
                                     </a>
                                     <button class="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-4 px-6 rounded-xl flex items-center justify-center transition-colors border border-zinc-700">
@@ -1386,39 +1377,22 @@
         // --- FUNCIONALIDADE: ENVIO DO FORMULARIO DE CADASTRO ---
         function submitRegistration(event) {
             event.preventDefault();
-
-            const submitBtn = document.getElementById('registerSubmitBtn');
-            const originalBtnContent = submitBtn.innerHTML;
-
-            // Set loading state
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 mr-2 animate-spin"></i> Enviando...`;
+            const statusDiv = document.getElementById('registerStatus');
+            statusDiv.classList.remove('hidden');
+            statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
+            statusDiv.innerHTML = `
+                <div class="flex flex-col items-center justify-center">
+                    <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
+                    <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
+                    <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
+                </div>
+            `;
             lucide.createIcons();
 
-            // Simulate network request
+            // Simula um reset do form apos envio e leitura
             setTimeout(() => {
-                const statusDiv = document.getElementById('registerStatus');
-                statusDiv.classList.remove('hidden');
-                statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
-                statusDiv.innerHTML = `
-                    <div class="flex flex-col items-center justify-center">
-                        <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
-                        <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
-                        <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
-                    </div>
-                `;
-                lucide.createIcons();
-
-                // Reset button state
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnContent;
-                lucide.createIcons();
-
-                // Simula um reset do form apos envio e leitura
-                setTimeout(() => {
-                    document.getElementById('registrationForm').reset();
-                }, 1000);
-            }, 1500);
+                document.getElementById('registrationForm').reset();
+            }, 1000);
         }
     </script>
 </body>
