@@ -484,12 +484,23 @@
                                 <label class="block text-sm font-medium text-white mb-1">Fotos para o Perfil (Até 5 fotos)</label>
                                 <p class="text-xs text-zinc-500 mb-3">Envie fotos com boa iluminação, sem excesso de filtros.</p>
                                 <div class="flex items-center justify-center w-full">
-                                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-zinc-700 border-dashed rounded-xl cursor-pointer bg-zinc-950/50 hover:bg-zinc-900 transition-colors">
+                                    <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-zinc-700 border-dashed rounded-xl cursor-pointer bg-zinc-950/50 hover:bg-zinc-900 transition-colors focus-within:ring-2 focus-within:ring-amber-500 focus-within:border-amber-500">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                            <i data-lucide="upload-cloud" class="w-8 h-8 text-zinc-500 mb-2"></i>
-                                            <p class="text-sm text-zinc-400"><span class="font-semibold text-amber-500">Clique para selecionar</span> ou arraste</p>
+                                            <i data-lucide="upload-cloud" id="upload-icon" class="w-8 h-8 text-zinc-500 mb-2"></i>
+                                            <p id="upload-text" class="text-sm text-zinc-400"><span class="font-semibold text-amber-500">Clique para selecionar</span> ou arraste</p>
                                         </div>
-                                        <input type="file" class="hidden" multiple accept="image/*" />
+                                        <input type="file" id="profile-upload" class="sr-only" multiple accept="image/*" onchange="
+                                            const fileCount = this.files.length;
+                                            const textEl = document.getElementById('upload-text');
+                                            const iconEl = document.getElementById('upload-icon');
+                                            if (fileCount > 0) {
+                                                textEl.innerHTML = '<span class=\'font-semibold text-amber-500\'>' + fileCount + ' arquivo(s) selecionado(s)</span>';
+                                                iconEl.classList.replace('text-zinc-500', 'text-amber-500');
+                                            } else {
+                                                textEl.innerHTML = '<span class=\'font-semibold text-amber-500\'>Clique para selecionar</span> ou arraste';
+                                                iconEl.classList.replace('text-amber-500', 'text-zinc-500');
+                                            }
+                                        "/>
                                     </label>
                                 </div>
                             </div>
