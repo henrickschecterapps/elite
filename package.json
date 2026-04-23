@@ -1,0 +1,12 @@
+{
+  "name": "elite-luxury-escorts",
+  "version": "1.0.0",
+  "description": "Elite luxury escorts directory",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/mobileMenu.test.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
