@@ -1040,7 +1040,24 @@
         }
 
         // Função auxiliar para gerar o HTML do card de uma modelo PREMIUM
-        function generateModelCard(model) {
+        function generateModelCard(model, isCompact = false) {
+            if (isCompact) {
+                return `
+                <div onclick="openProfile(${model.id})" class="relative group cursor-pointer rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800/50 hover:border-zinc-600 transition-all duration-300 opacity-90 hover:opacity-100">
+                    <div class="relative aspect-[3/4] overflow-hidden bg-zinc-800">
+                        <img src="${model.image}" alt="${model.name}" class="w-full h-full object-cover transition-transform duration-500 opacity-80 group-hover:opacity-100 group-hover:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-90"></div>
+
+                        <div class="absolute bottom-0 left-0 w-full p-3 z-10">
+                            <h3 class="text-sm font-serif text-white mb-0.5 truncate">${model.name}, ${model.age}</h3>
+                            <p class="text-zinc-400 text-[10px] flex items-center font-light truncate">
+                                <i data-lucide="map-pin" class="w-3 h-3 mr-1 text-zinc-500"></i> ${model.city}
+                            </p>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
             const isFav = favorites.includes(model.id);
             const heartClass = isFav
                 ? "text-red-500 fill-red-500"
@@ -1076,27 +1093,25 @@
             </div>`;
         }
 
-        // Função auxiliar para gerar o HTML do card de uma modelo START (GRÁTIS) - Menor e mais simples
-        function generateCompactModelCard(model) {
-            return `
-            <div onclick="openProfile(${model.id})" class="relative group cursor-pointer rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800/50 hover:border-zinc-600 transition-all duration-300 opacity-90 hover:opacity-100">
-                <div class="relative aspect-[3/4] overflow-hidden bg-zinc-800">
-                    <img src="${model.image}" alt="${model.name}" class="w-full h-full object-cover transition-transform duration-500 opacity-80 group-hover:opacity-100 group-hover:scale-105" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-90"></div>
+        // Função auxiliar para renderizar as vitrines/seções
+        function renderSection(title, subtitle, modelsArray, isCompact = false) {
+            if (modelsArray.length === 0) return '';
 
-                    <div class="absolute bottom-0 left-0 w-full p-3 z-10">
-                        <h3 class="text-sm font-serif text-white mb-0.5 truncate">${model.name}, ${model.age}</h3>
-                        <p class="text-zinc-400 text-[10px] flex items-center font-light truncate">
-                            <i data-lucide="map-pin" class="w-3 h-3 mr-1 text-zinc-500"></i> ${model.city}
-                        </p>
+            if (isCompact) {
+                return `
+                <div class="mb-8 pt-12 border-t border-zinc-900/80">
+                    <div class="mb-6">
+                        <h2 class="text-xl sm:text-2xl font-serif text-zinc-300 flex items-center">${title}</h2>
+                        <p class="text-zinc-500 mt-1 text-sm">${subtitle}</p>
+                    </div>
+                    <!-- Grade menor: 2 colunas no mobile, 4 no tablet, 6 no PC -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        ${modelsArray.map(m => generateModelCard(m, true)).join('')}
                     </div>
                 </div>
-            </div>`;
-        }
+                `;
+            }
 
-        // Função auxiliar para renderizar as vitrines/seções Premium
-        function renderSection(title, subtitle, modelsArray) {
-            if (modelsArray.length === 0) return '';
             return `
                 <div class="mb-16">
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8">
@@ -1109,24 +1124,7 @@
                         </button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        ${modelsArray.map(generateModelCard).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        // Função auxiliar para renderizar a vitrine Start (Grátis)
-        function renderCompactSection(title, subtitle, modelsArray) {
-            if (modelsArray.length === 0) return '';
-            return `
-                <div class="mb-8 pt-12 border-t border-zinc-900/80">
-                    <div class="mb-6">
-                        <h2 class="text-xl sm:text-2xl font-serif text-zinc-300 flex items-center">${title}</h2>
-                        <p class="text-zinc-500 mt-1 text-sm">${subtitle}</p>
-                    </div>
-                    <!-- Grade menor: 2 colunas no mobile, 4 no tablet, 6 no PC -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        ${modelsArray.map(generateCompactModelCard).join('')}
+                        ${modelsArray.map(m => generateModelCard(m, false)).join('')}
                     </div>
                 </div>
             `;
@@ -1159,7 +1157,7 @@
                     ${renderSection('<i data-lucide="star" class="w-6 h-6 mr-2 text-amber-500"></i> Novas Descobertas', 'Rostos recém-chegados à nossa plataforma.', novas)}
                     ${renderSection('<i data-lucide="plane" class="w-6 h-6 mr-2 text-amber-500"></i> Companhias para Viagens', 'Perfeitas para acompanhar você em destinos inesquecíveis.', viagens)}
                     ${renderSection('<i data-lucide="sparkles" class="w-6 h-6 mr-2 text-amber-500"></i> Destaques da Semana', 'Modelos recomendadas pela nossa curadoria.', geral)}
-                    ${renderCompactSection('<i data-lucide="users" class="w-5 h-5 mr-2 text-zinc-500"></i> Conheça Mais Modelos', 'Novos perfis (Plano Start) ingressando na plataforma.', gratuitas)}
+                    ${renderSection('<i data-lucide="users" class="w-5 h-5 mr-2 text-zinc-500"></i> Conheça Mais Modelos', 'Novos perfis (Plano Start) ingressando na plataforma.', gratuitas, true)}
                 `;
             }
             // SE ALGUM FILTRO ESTIVER APLICADO -> Renderizar o Grid Convencional (Separando pagas das grátis)
@@ -1184,7 +1182,7 @@
                 if (paidFiltered.length > 0) {
                     html += `
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                            ${paidFiltered.map(generateModelCard).join('')}
+                            ${paidFiltered.map(m => generateModelCard(m, false)).join('')}
                         </div>
                     `;
                 }
@@ -1194,7 +1192,7 @@
                         <div class="mt-8 pt-8 border-t border-zinc-900">
                             <h3 class="text-lg font-serif text-zinc-400 mb-4 flex items-center"><i data-lucide="users" class="w-4 h-4 mr-2"></i> Outros Resultados (Perfis Start)</h3>
                             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                                ${freeFiltered.map(generateCompactModelCard).join('')}
+                                ${freeFiltered.map(m => generateModelCard(m, true)).join('')}
                             </div>
                         </div>
                     `;
