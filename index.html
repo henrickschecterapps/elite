@@ -1374,6 +1374,19 @@
             lucide.createIcons();
         }
 
+        // --- FUNCIONALIDADE: ATUALIZACAO DE INPUT DE ARQUIVOS (UX/A11y) ---
+        function updateProfileFileCount(input) {
+            const textElement = document.getElementById('profile-photos-text');
+            if (!textElement) return;
+
+            if (input.files && input.files.length > 0) {
+                const count = input.files.length;
+                textElement.innerHTML = `<span class="font-semibold text-amber-500">${count} arquivo(s) selecionado(s)</span>`;
+            } else {
+                textElement.innerHTML = `<span class="font-semibold text-amber-500">Clique para selecionar</span> ou arraste`;
+            }
+        }
+
         // --- FUNCIONALIDADE: ENVIO DO FORMULARIO DE CADASTRO ---
         function submitRegistration(event) {
             event.preventDefault();
