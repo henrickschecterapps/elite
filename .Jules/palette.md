@@ -1,3 +1,6 @@
 ## 2026-04-16 - Adicionar ARIA Labels em botões icon-only
 **Learning:** Elementos interativos como botões e inputs de busca que dependem inteiramente de ícones para comunicar seu propósito não são acessíveis para leitores de tela e tecnologias assistivas sem a utilização da tag `aria-label`. Pude perceber a ausência desta boa prática neste projeto em elementos cruciais como navegação lightbox, botões mobile e campos de busca.
 **Action:** Sempre verificar a presença e adicionar as propriedades `aria-label` adequadas em botões ou inputs que contêm apenas ícones, providenciando descrições concisas de seu propósito em português.
+## 2026-04-16 - Custom File Input Accessibility e Feedback
+**Learning:** Ocultar um input de arquivo com `display: none` ou `class="hidden"` remove-o da ordem de tabulação, tornando-o inacessível por teclado. Além disso, quando o input é customizado e não mostra o caminho padrão, os usuários perdem o feedback de que o arquivo foi realmente selecionado.
+**Action:** Usar a classe `sr-only` ao invés de `hidden` para custom inputs, adicionar `focus-within` ao container para dar feedback visual durante navegação por teclado e usar JS para atualizar o texto do container para mostrar a quantidade ou nome dos arquivos selecionados.
