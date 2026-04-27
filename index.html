@@ -519,7 +519,7 @@
                     <!-- BOTAO ENVIAR -->
                     <div id="registerStatus" class="hidden rounded-xl p-4 text-center"></div>
 
-                    <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-medium py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-amber-500/20 text-lg flex justify-center items-center">
+                    <button id="submitRegistrationBtn" type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-medium py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-amber-500/20 text-lg flex justify-center items-center disabled:opacity-75 disabled:cursor-not-allowed">
                         <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> Enviar Solicitação de Cadastro
                     </button>
                 </form>
@@ -1337,7 +1337,7 @@
                                     <p class="text-xs text-zinc-500 mb-4 flex items-center"><i data-lucide="shield" class="w-3 h-3 mr-1 shrink-0"></i> Seu comentário será enviado para moderação.</p>
                                     <div class="flex flex-col gap-3">
                                         <textarea id="comment-text" placeholder="Como foi sua experiência?" rows="3" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-white text-sm focus:outline-none focus:border-amber-500 resize-none"></textarea>
-                                        <button onclick="submitComment()" class="self-end bg-amber-600 hover:bg-amber-500 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors flex items-center">Enviar Avaliação <i data-lucide="send" class="w-4 h-4 ml-2"></i></button>
+                                        <button id="submitCommentBtn" onclick="submitComment()" class="self-end bg-amber-600 hover:bg-amber-500 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors flex items-center disabled:opacity-75 disabled:cursor-not-allowed">Enviar Avaliação <i data-lucide="send" class="w-4 h-4 ml-2"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -1365,13 +1365,20 @@
         function submitComment() {
             const txt = document.getElementById('comment-text').value;
             if(txt.trim() === '') return;
-            const box = document.getElementById('comment-form-box');
-            box.innerHTML = `
-                <div class="bg-green-500/10 border border-green-500/30 text-green-400 p-4 rounded-xl text-sm text-center flex items-center justify-center">
-                    <i data-lucide="check" class="w-5 h-5 mr-2"></i> Avaliação enviada com sucesso! Aguardando moderação.
-                </div>
-            `;
+            const btn = document.getElementById('submitCommentBtn');
+            btn.disabled = true;
+            btn.innerHTML = `Enviando <i data-lucide="loader-2" class="w-4 h-4 ml-2 animate-spin"></i>`;
             lucide.createIcons();
+
+            setTimeout(() => {
+                const box = document.getElementById('comment-form-box');
+                box.innerHTML = `
+                    <div class="bg-green-500/10 border border-green-500/30 text-green-400 p-4 rounded-xl text-sm text-center flex items-center justify-center">
+                        <i data-lucide="check" class="w-5 h-5 mr-2"></i> Avaliação enviada com sucesso! Aguardando moderação.
+                    </div>
+                `;
+                lucide.createIcons();
+            }, 1000);
         }
 
         // --- FUNCIONALIDADE: ATUALIZACAO DE INPUT DE ARQUIVOS (UX/A11y) ---
@@ -1390,21 +1397,33 @@
         // --- FUNCIONALIDADE: ENVIO DO FORMULARIO DE CADASTRO ---
         function submitRegistration(event) {
             event.preventDefault();
-            const statusDiv = document.getElementById('registerStatus');
-            statusDiv.classList.remove('hidden');
-            statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
-            statusDiv.innerHTML = `
-                <div class="flex flex-col items-center justify-center">
-                    <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
-                    <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
-                    <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
-                </div>
-            `;
+            const btn = document.getElementById('submitRegistrationBtn');
+            const originalBtnHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 mr-2 animate-spin"></i> Enviando...`;
             lucide.createIcons();
 
-            // Simula um reset do form apos envio e leitura
             setTimeout(() => {
-                document.getElementById('registrationForm').reset();
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHTML;
+                lucide.createIcons();
+
+                const statusDiv = document.getElementById('registerStatus');
+                statusDiv.classList.remove('hidden');
+                statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
+                statusDiv.innerHTML = `
+                    <div class="flex flex-col items-center justify-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
+                        <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
+                        <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
+                    </div>
+                `;
+                lucide.createIcons();
+
+                // Simula um reset do form apos envio e leitura
+                setTimeout(() => {
+                    document.getElementById('registrationForm').reset();
+                }, 1000);
             }, 1000);
         }
 
