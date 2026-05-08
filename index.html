@@ -519,8 +519,10 @@
                     <!-- BOTAO ENVIAR -->
                     <div id="registerStatus" class="hidden rounded-xl p-4 text-center"></div>
 
-                    <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-medium py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-amber-500/20 text-lg flex justify-center items-center">
-                        <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i> Enviar Solicitação de Cadastro
+                    <button type="submit" id="submitRegisterBtn" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-medium py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-amber-500/20 text-lg flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span id="submitRegisterIconDefault" class="flex items-center"><i data-lucide="check-circle" class="w-5 h-5 mr-2"></i></span>
+                        <span id="submitRegisterIconLoading" class="hidden flex items-center"><i data-lucide="loader-2" class="w-5 h-5 mr-2 animate-spin"></i></span>
+                        <span id="submitRegisterText">Enviar Solicitação de Cadastro</span>
                     </button>
                 </form>
             </div>
@@ -1390,22 +1392,47 @@
         // --- FUNCIONALIDADE: ENVIO DO FORMULARIO DE CADASTRO ---
         function submitRegistration(event) {
             event.preventDefault();
-            const statusDiv = document.getElementById('registerStatus');
-            statusDiv.classList.remove('hidden');
-            statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
-            statusDiv.innerHTML = `
-                <div class="flex flex-col items-center justify-center">
-                    <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
-                    <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
-                    <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
-                </div>
-            `;
-            lucide.createIcons();
 
-            // Simula um reset do form apos envio e leitura
+            const btn = document.getElementById('submitRegisterBtn');
+            const btnText = document.getElementById('submitRegisterText');
+            const iconDefault = document.getElementById('submitRegisterIconDefault');
+            const iconLoading = document.getElementById('submitRegisterIconLoading');
+
+            // Set loading state
+            btn.disabled = true;
+            btnText.innerText = 'Enviando...';
+            iconDefault.classList.add('hidden');
+            iconLoading.classList.remove('hidden');
+
+            // Simulate network request
             setTimeout(() => {
-                document.getElementById('registrationForm').reset();
-            }, 1000);
+                // Restore button state immediately
+                btn.disabled = false;
+                btnText.innerText = 'Enviar Solicitação de Cadastro';
+                iconDefault.classList.remove('hidden');
+                iconLoading.classList.add('hidden');
+
+                // Show success message
+                const statusDiv = document.getElementById('registerStatus');
+                statusDiv.classList.remove('hidden');
+                statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400', 'mb-4');
+                statusDiv.innerHTML = `
+                    <div class="flex flex-col items-center justify-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
+                        <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
+                        <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
+                    </div>
+                `;
+                lucide.createIcons();
+
+                // Reset form
+                event.target.reset();
+
+                // Hide success message after 8 seconds to allow enough reading time
+                setTimeout(() => {
+                    statusDiv.classList.add('hidden');
+                }, 8000);
+            }, 1500);
         }
 
         // --- FUNCIONALIDADE: FEEDBACK DE SELEÇÃO DE ARQUIVOS (UX/A11Y) ---
