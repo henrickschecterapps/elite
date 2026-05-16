@@ -1,7 +1,11 @@
-## 2026-04-16 - Adicionar ARIA Labels em botões icon-only
-**Learning:** Elementos interativos como botões e inputs de busca que dependem inteiramente de ícones para comunicar seu propósito não são acessíveis para leitores de tela e tecnologias assistivas sem a utilização da tag `aria-label`. Pude perceber a ausência desta boa prática neste projeto em elementos cruciais como navegação lightbox, botões mobile e campos de busca.
-**Action:** Sempre verificar a presença e adicionar as propriedades `aria-label` adequadas em botões ou inputs que contêm apenas ícones, providenciando descrições concisas de seu propósito em português.
+## 2024-11-20 - Adding Loading/Disabled State to Vanilla JS Form
 
-## 2026-04-24 - File input accessibility with sr-only
-**Learning:** Custom styled file input components that hide the actual `<input type="file">` element using `class="hidden"` completely remove the element from the accessibility tree and keyboard tab order, rendering them unusable for keyboard-only and screen reader users. The application failed to provide focus visibility or screen reader compatibility for the image upload inputs.
-**Action:** Replace `class="hidden"` with `.sr-only` (screen-reader only) for the actual input element, allowing it to remain focusable and readable by screen readers. Apply `focus-within` styles on the parent custom label wrapper to ensure a clear visual indicator is shown to keyboard users when the input receives focus. Add JavaScript logic to update visual elements to reflect file selection to give all users proper interaction feedback.
+**Learning:** When simulating network requests with vanilla JavaScript `setTimeout` and changing submit button states (e.g., to `<i data-lucide="loader-2" class="w-5 h-5 mr-2 animate-spin"></i> Enviando...`), it is critical to save the button's `originalBtnContent` (`innerHTML`) and restore it explicitly once the request "completes". Also, `event.submitter` is a cleaner way to capture the button that fired the submission without needing `id` selectors.
+
+**Action:** Whenever implementing a disabled/loading state for simulated async actions in vanilla JS without frameworks like React, always explicitly restore the original DOM state of the trigger element to prevent visual bugs if the user intends to perform the action again. Also use `event.submitter` when changing button states within a form `submit` listener to ensure accuracy.
+
+## 2024-11-20 - Preserving Journal Context
+
+**Learning:** When using bash commands to update journal files like `palette.md`, using the `>` operator overwrites the entire file, destroying previous context.
+
+**Action:** Always use the `>>` append operator to add new entries to journal files rather than overwriting them, ensuring historical learnings are retained.
