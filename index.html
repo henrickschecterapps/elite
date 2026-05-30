@@ -1390,22 +1390,40 @@
         // --- FUNCIONALIDADE: ENVIO DO FORMULARIO DE CADASTRO ---
         function submitRegistration(event) {
             event.preventDefault();
-            const statusDiv = document.getElementById('registerStatus');
-            statusDiv.classList.remove('hidden');
-            statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
-            statusDiv.innerHTML = `
-                <div class="flex flex-col items-center justify-center">
-                    <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
-                    <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
-                    <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
-                </div>
-            `;
+
+            // Get the submit button and store its original content
+            const submitButton = event.submitter;
+            const originalButtonContent = submitButton.innerHTML;
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+            submitButton.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 mr-2 animate-spin"></i> Enviando...';
             lucide.createIcons();
 
-            // Simula um reset do form apos envio e leitura
+            // Simulate network request
             setTimeout(() => {
-                document.getElementById('registrationForm').reset();
-            }, 1000);
+                const statusDiv = document.getElementById('registerStatus');
+                statusDiv.classList.remove('hidden');
+                statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
+                statusDiv.innerHTML = `
+                    <div class="flex flex-col items-center justify-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
+                        <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
+                        <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
+                    </div>
+                `;
+                lucide.createIcons();
+
+                // Restore button state immediately upon showing success
+                submitButton.disabled = false;
+                submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+                submitButton.innerHTML = originalButtonContent;
+                lucide.createIcons();
+
+                // Clear the form
+                event.target.reset();
+            }, 1500); // Simulated delay
         }
 
         // --- FUNCIONALIDADE: FEEDBACK DE SELEÇÃO DE ARQUIVOS (UX/A11Y) ---
