@@ -1390,22 +1390,49 @@
         // --- FUNCIONALIDADE: ENVIO DO FORMULARIO DE CADASTRO ---
         function submitRegistration(event) {
             event.preventDefault();
+            const form = event.target;
+            const submitBtn = event.submitter;
             const statusDiv = document.getElementById('registerStatus');
-            statusDiv.classList.remove('hidden');
-            statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
-            statusDiv.innerHTML = `
-                <div class="flex flex-col items-center justify-center">
-                    <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
-                    <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
-                    <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
-                </div>
+
+            // Store original button state
+            const originalBtnContent = submitBtn.innerHTML;
+
+            // Set loading state
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+            submitBtn.innerHTML = `
+                <i data-lucide="loader-2" class="w-5 h-5 mr-2 animate-spin"></i> Enviando...
             `;
             lucide.createIcons();
 
-            // Simula um reset do form apos envio e leitura
+            // Simulate network request
             setTimeout(() => {
-                document.getElementById('registrationForm').reset();
-            }, 1000);
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+                submitBtn.innerHTML = originalBtnContent;
+                lucide.createIcons();
+
+                // Show success feedback
+                statusDiv.classList.remove('hidden');
+                statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
+                statusDiv.innerHTML = `
+                    <div class="flex flex-col items-center justify-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
+                        <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
+                        <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
+                    </div>
+                `;
+                lucide.createIcons();
+
+                // Reset form and hide feedback after adequate reading time (8s)
+                setTimeout(() => {
+                    form.reset();
+                    statusDiv.classList.add('hidden');
+                    statusDiv.innerHTML = '';
+                    updateProfileFileCount(document.querySelector('input[type="file"][multiple]')); // Reset file count text
+                }, 8000);
+            }, 1500);
         }
 
         // --- FUNCIONALIDADE: FEEDBACK DE SELEÇÃO DE ARQUIVOS (UX/A11Y) ---
