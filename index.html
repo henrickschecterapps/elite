@@ -1387,25 +1387,66 @@
             }
         }
 
+        // Variaveis globais para gerenciar os timeouts e evitar conditions de race
+        let submitTimeoutId = null;
+        let successMessageTimeoutId = null;
+
         // --- FUNCIONALIDADE: ENVIO DO FORMULARIO DE CADASTRO ---
         function submitRegistration(event) {
             event.preventDefault();
-            const statusDiv = document.getElementById('registerStatus');
-            statusDiv.classList.remove('hidden');
-            statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
-            statusDiv.innerHTML = `
-                <div class="flex flex-col items-center justify-center">
-                    <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
-                    <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
-                    <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
-                </div>
-            `;
+
+            if (submitTimeoutId) {
+                clearTimeout(submitTimeoutId);
+            }
+            if (successMessageTimeoutId) {
+                clearTimeout(successMessageTimeoutId);
+            }
+
+            const form = event.target;
+            const submitBtn = event.submitter;
+            const originalBtnHTML = submitBtn.innerHTML;
+
+            // Define o estado de loading no botão
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+            submitBtn.innerHTML = '<i data-lucide="loader-2" class="animate-spin w-5 h-5 mr-2"></i> Enviando...';
             lucide.createIcons();
 
-            // Simula um reset do form apos envio e leitura
-            setTimeout(() => {
-                document.getElementById('registrationForm').reset();
-            }, 1000);
+            const statusDiv = document.getElementById('registerStatus');
+            statusDiv.classList.add('hidden'); // Oculta mensagem anterior se houver
+
+            submitTimeoutId = setTimeout(() => {
+                // Restaura o botão ao estado original antes de mostrar a mensagem de sucesso
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+                submitBtn.innerHTML = originalBtnHTML;
+                lucide.createIcons();
+
+                statusDiv.classList.remove('hidden');
+                statusDiv.className = 'rounded-xl p-4 text-center bg-green-500/10 border border-green-500/30 text-green-400';
+                statusDiv.innerHTML = `
+                    <div class="flex flex-col items-center justify-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
+                        <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
+                        <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
+                    </div>
+                `;
+                lucide.createIcons();
+
+                form.reset();
+
+                // Reseta o input de arquivo visualmente
+                const contentP = document.getElementById('profile-upload-content');
+                if (contentP) {
+                    contentP.innerHTML = '<span class="font-semibold text-amber-500">Clique para selecionar</span> ou arraste';
+                }
+
+                // Oculta a mensagem de sucesso apos 8 segundos para dar tempo de leitura
+                successMessageTimeoutId = setTimeout(() => {
+                    statusDiv.classList.add('hidden');
+                }, 8000);
+
+            }, 1500); // 1.5s delay simulado
         }
 
         // --- FUNCIONALIDADE: FEEDBACK DE SELEÇÃO DE ARQUIVOS (UX/A11Y) ---
