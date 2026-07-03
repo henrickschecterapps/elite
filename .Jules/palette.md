@@ -5,3 +5,7 @@
 ## 2026-04-24 - File input accessibility with sr-only
 **Learning:** Custom styled file input components that hide the actual `<input type="file">` element using `class="hidden"` completely remove the element from the accessibility tree and keyboard tab order, rendering them unusable for keyboard-only and screen reader users. The application failed to provide focus visibility or screen reader compatibility for the image upload inputs.
 **Action:** Replace `class="hidden"` with `.sr-only` (screen-reader only) for the actual input element, allowing it to remain focusable and readable by screen readers. Apply `focus-within` styles on the parent custom label wrapper to ensure a clear visual indicator is shown to keyboard users when the input receives focus. Add JavaScript logic to update visual elements to reflect file selection to give all users proper interaction feedback.
+
+## 2026-04-26 - Loading States on Async Forms
+**Learning:** When simulating async network requests on form submissions, showing instant success without intermediate loading/disabled states fails to provide accurate system status to the user and allows duplicate submissions.
+**Action:** Implement disabled states and loading spinners on submit buttons during async operations. Always restore the button's original state immediately upon completion, capturing its innerHTML prior to modification, and use global timeouts with clearTimeout to prevent erratic UI behavior across multiple interactions.
