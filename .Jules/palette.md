@@ -5,3 +5,7 @@
 ## 2026-04-24 - File input accessibility with sr-only
 **Learning:** Custom styled file input components that hide the actual `<input type="file">` element using `class="hidden"` completely remove the element from the accessibility tree and keyboard tab order, rendering them unusable for keyboard-only and screen reader users. The application failed to provide focus visibility or screen reader compatibility for the image upload inputs.
 **Action:** Replace `class="hidden"` with `.sr-only` (screen-reader only) for the actual input element, allowing it to remain focusable and readable by screen readers. Apply `focus-within` styles on the parent custom label wrapper to ensure a clear visual indicator is shown to keyboard users when the input receives focus. Add JavaScript logic to update visual elements to reflect file selection to give all users proper interaction feedback.
+
+## 2024-05-24 - Form Submission Feedback
+**Learning:** Adding explicit loading and disabled states to form submit buttons during simulated network requests provides critical system status feedback to the user and prevents erratic behavior from duplicate submissions. Restoring the button's original state immediately upon showing success/error messages is necessary to prevent contradictory UI states.
+**Action:** Always implement disabled/loading states on buttons using `event.submitter` in `onsubmit` handlers, store timeouts globally, and capture `innerHTML` explicitly for seamless restoration.
