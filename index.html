@@ -1387,25 +1387,54 @@
             }
         }
 
+        let registrationTimeout;
         // --- FUNCIONALIDADE: ENVIO DO FORMULARIO DE CADASTRO ---
         function submitRegistration(event) {
             event.preventDefault();
-            const statusDiv = document.getElementById('registerStatus');
-            statusDiv.classList.remove('hidden');
-            statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400');
-            statusDiv.innerHTML = `
-                <div class="flex flex-col items-center justify-center">
-                    <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
-                    <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
-                    <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
-                </div>
-            `;
-            lucide.createIcons();
+            const submitBtn = event.submitter;
+            const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
 
-            // Simula um reset do form apos envio e leitura
+            // Limpa timeout anterior caso exista (previne concorrência)
+            if (registrationTimeout) clearTimeout(registrationTimeout);
+
+            // Estado de Carregamento (Loading State)
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 mr-2 animate-spin"></i> Enviando...`;
+                submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                lucide.createIcons();
+            }
+
+            // Simula delay de requisição assíncrona
             setTimeout(() => {
-                document.getElementById('registrationForm').reset();
-            }, 1000);
+                // Restaura estado original do botão
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnHTML;
+                    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                }
+
+                // Reseta form usando event.target em vez de document.getElementById (assunção mais segura)
+                event.target.reset();
+
+                // Mostra mensagem de sucesso
+                const statusDiv = document.getElementById('registerStatus');
+                statusDiv.classList.remove('hidden');
+                statusDiv.classList.add('bg-green-500/10', 'border', 'border-green-500/30', 'text-green-400', 'mb-6');
+                statusDiv.innerHTML = `
+                    <div class="flex flex-col items-center justify-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 mb-2"></i>
+                        <span class="font-medium text-lg">Cadastro Recebido com Sucesso!</span>
+                        <span class="text-sm mt-1 opacity-80">Nossa equipe de moderação fará a verificação dos dados e entrará em contato via WhatsApp em até 24h.</span>
+                    </div>
+                `;
+                lucide.createIcons();
+
+                // Remove mensagem após 8 segundos (Tempo de leitura adequado para mensagem de múltiplas linhas)
+                registrationTimeout = setTimeout(() => {
+                    statusDiv.classList.add('hidden');
+                }, 8000);
+            }, 1500); // 1.5s de loading
         }
 
         // --- FUNCIONALIDADE: FEEDBACK DE SELEÇÃO DE ARQUIVOS (UX/A11Y) ---
